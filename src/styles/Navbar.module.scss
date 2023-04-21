@@ -1,0 +1,108 @@
+.Navbar{
+    display:flex;
+    justify-content: space-between;
+    background-color: #0a1a44;
+    position: fixed;
+    width:100vw;
+    z-index: 999;
+    position: relative;
+    padding:1rem;
+    align-items: center;
+    list-style: none    ;
+    .Navbar_left{
+        display:flex;
+        align-items: center;
+        gap:1rem;
+        .logoImg{
+            width:40px;
+            height:40px;
+        }
+        .branding{
+            font-weight: 100;
+            font-size: large;
+            color:white;
+        }
+    }
+    .Navbar_right{
+        display:none;
+    }
+    .MobileNavbar_right{
+        position: absolute;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding:0 0.5rem;
+        z-index: 999;
+        right:2rem;
+        background-color: #0a1a44;
+        .MobileNavbar_icon{
+            list-style: none;
+            display:flex;
+            flex-direction: column;
+            position: relative;
+            gap:0.2rem;
+            .MobileNavbar_icon_li{
+                width:20px;
+                height:2px;
+                background-color: white;
+                position: relative;
+            }
+        }
+    }
+}
+.navbar_right_item_list{
+    display:flex;
+    flex-direction: column;
+    list-style: none;
+    background-color:#0a1a44 ;
+    color:white;
+    position: absolute;
+    top:4rem;
+    height:100vh;
+    z-index: 999;
+    overflow: hidden;
+    .navbar_right_item{
+        width: 15rem;
+        padding:2rem 4rem;
+        border:1px solid white;
+        border-left:none;
+        cursor: pointer;
+    }
+}
+@media screen and (min-width:950px){
+.Navbar{
+    display:flex;
+    justify-content: space-between;
+    background-color: #0a1a44;
+    position: fixed;
+    width:100%;
+    z-index: 999;
+    padding:1rem;
+    .Navbar_left{
+        display:flex;
+        align-items: center;
+        gap:1rem;
+        .logoImg{
+            width:40px;
+            height:40px;
+        }
+        .branding{
+            font-weight: 100;
+            font-size: x-larger;
+            color:white;
+        }
+    }
+    .Navbar_right{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        gap:2rem;
+    }
+    .MobileNavbar_right{
+        display:none;   
+    }
+   }
+   .navbar_right_item_list{
+    display:none;
+   }
+}

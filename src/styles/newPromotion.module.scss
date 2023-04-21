@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap');
+.newPromotion{
+    width:100vw;
+    height:100vh; 
+    padding:1rem;
+    padding-top:2rem;
+    display:flex;
+    flex-direction: column;
+    gap:5rem;
+    .newPromotion_heading{
+        padding-left:4rem;   
+    }
+    .newPromotion_body{
+        display:flex;
+        justify-content: space-around;
+        .promotionForm{
+            width:fit-content;
+            display:flex;
+            flex-direction: column;
+            gap:1.5rem;
+            .discount_off_onn{
+                display:flex;
+                justify-content: space-between;
+            }
+            .date_rangePicker{
+                display:flex;
+                flex-direction: column;
+                gap:1rem;
+                .validate_picker_label{
+                    font-weight: 600;
+                    font-size: smaller;
+                }
+                .daterangePicker{
+                    width: fit-content;
+                }
+            }
+            .savePromotion{
+                width: fit-content;
+                padding:4px 24px;
+                border-radius: 8px;
+                border: none;
+                background-color: black;
+                color:white; 
+                margin: auto;
+                cursor: pointer;   
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+.inputTags{
+    display:flex;
+    flex-direction: column;
+    gap:12px;
+    .InputLable{
+        font-weight: 700;
+        font-size: small;
+        font-family: 'Noto Sans Lepcha', sans-serif;
+    }
+    .CustomerInputText{
+        width:300px;
+        border-radius: 12px;
+        padding:8px 12px;
+        font-size: xx-small;
+        outline: none;
+        border:none;
+    }
+    .CustomInputNumber{
+        width:125px;
+        border-radius: 12px;
+        padding:8px 12px;
+        font-size: xx-small;
+        outline: none;
+        border:none;
+    }
+}
