@@ -1,21 +1,18 @@
 .createAccount{
     width:100vw;
     height:100vh;
-    padding:1rem 2rem;
+    padding-top:14rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    // background-image: url("../utils/promotional_products_72_dpi.jpg");
-    background-size: cover;
-    // color:white;
     .createAccount_left{
         display:flex;
         backdrop-filter: blur(10px);
-        padding:4rem;
+        padding:2rem;
         flex-direction: column;
         gap:2rem;
         .createAccount_heading{
-            font-size: 3rem;
+            font-size: 2.4rem;
             font-weight: 400;
         }
         .createAccount_desc{
@@ -27,6 +24,9 @@
             flex-direction: column;
             gap:0.2rem;
             align-items: center;
+            .form_input{
+                width:80% !important
+            }
             .insertLogo{
                 padding-top:1rem;
                 .image_input{
@@ -49,6 +49,25 @@
             color:white;
             cursor: pointer;
         }
+    }   
+    }
+    .signUp_img{
+        display:none;
+    }
+}
+@media screen and (min-width:950px) {
+    .createAccount{
+        padding-top:8rem;
+        .createAccount_left{
+            .createAccount_form{
+                .form_input{
+                    width:40% !important
+                }
+            }
+        }
+        .signUp_img{
+            display:block;
+            width: fit-content;
         }
     }
 }

@@ -1,10 +1,13 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer,useEffect, useState } from 'react'
 import styles from '../styles/signup.module.scss'
 import { TextField, InputLabel, Select, MenuItem, FormControl } from '@mui/material'
 import logoImg from '../utils/Screenshot from 2023-04-18 15-30-38.png'
 import Image from 'next/image';
 import SigninPopUp from '@/Components/SigninPopUp';
 import createPromoterAccount from '../handlers/createPromoterAccount.js';
+import { useSelector } from 'react-redux';
+import { userIdInfo } from '../../store/userData';
+import { useRouter } from 'next/router';
 interface initalData{
   address:string,
   city:string,
@@ -29,6 +32,9 @@ const initalData:initalData={
 export default function CreateAccount() {
   const [image, setImage] = useState<string>("");
   const [showPopUp,setShowPopUp]=useState(true);
+  const [value, setValue] = useState("");
+  const userId=useSelector(userIdInfo);
+  const route = useRouter();
   const reducer=(state:initalData,action:any)=>{
     switch(action.type){
       case "ADDRESS":
@@ -56,7 +62,7 @@ export default function CreateAccount() {
 
     const createPromoter=()=>{
       // store data to firebase
-      createPromoterAccount(state);
+      createPromoterAccount(state,userId);
     }
 
     const uploadImage = (e: any) => {
@@ -71,16 +77,26 @@ export default function CreateAccount() {
       }
       createPromoter();
     }
-    
+    useEffect(()=>{
+      if(!showPopUp){
+        dispatch({type:"MOBILE",payload:value.slice(3)})
+      }
+    },[showPopUp])
+    useEffect(()=>{
+      if(userId.length>0)
+      {
+        route.push("/")
+      }
+    },[userId])
     return (
     <>
       <div className={styles.createAccount}>
-        {/* {showPopUp?<SigninPopUp setShowPopUp={setShowPopUp}/>:<></>} */}
+        {showPopUp?<SigninPopUp value={value} setValue={setValue} setShowPopUp={setShowPopUp}/>:<></>}
         <div className={styles.createAccount_left}>
           <h2 className={styles.createAccount_heading}>Let's Get Started ...</h2>
           <p className={styles.createAccount_desc}>Please provide your business details. The information will be used in the promotion banner</p>
           <form className={styles.createAccount_form} onSubmit={handleSubmit}>
-            <FormControl sx={{ width: "40%" }} variant="standard">
+            <FormControl className={styles.form_input} variant="standard">
               <InputLabel className={styles.label} id="demo-simple-select-standard-label">Type</InputLabel>
               <Select
                 labelId="demo-simple-select-standard-label"
@@ -101,13 +117,13 @@ export default function CreateAccount() {
                 <MenuItem value={"Other"}>Other</MenuItem>
               </Select>
             </FormControl>
-            {state.type==="Other"?<TextField className={styles.label} inputProps={{ style: { fontSize: 12 } }} sx={{ width: "40%",color:'white'}} id="standard-basic" label="Enter Type of Business *" variant="standard" onChange={e=>setCustomType(e.target.value)} value={customType} />:<></>}
-            <TextField className={styles.label} inputProps={{ style: { fontSize: 12 }}} value={state.name} sx={{ width: "40%",color:'white'}} id="standard-basic" label="Name *" variant="standard" onChange={e=>dispatch({type:"NAME",payload:e.target.value})}/>
-            <TextField inputProps={{ style: { fontSize: 12 } }} sx={{ width: "40%" }} id="standard-basic" label="Mobile Number" variant="standard" onChange={e=>dispatch({type:"MOBILE",payload:e.target.value})}/>
-            <TextField inputProps={{ style: { fontSize: 12 } }} sx={{ width: "40%" }} id="standard-basic" label="Address *" variant="standard" onChange={e=>dispatch({type:"ADDRESS",payload:e.target.value})}/>
-            <TextField inputProps={{ style: { fontSize: 12 } }} sx={{ width: "40%" }} id="standard-basic" label="City *" variant="standard" onChange={e=>dispatch({type:"CITY",payload:e.target.value})}/>
-            <TextField inputProps={{ style: { fontSize: 12 } }} sx={{ width: "40%" }} id="standard-basic" label="State *" variant="standard" onChange={e=>dispatch({type:"STATE",payload:e.target.value})}/>
-            <TextField inputProps={{ style: { fontSize: 12 } }} sx={{ width: "40%" }} id="standard-basic" label="ZIP *" variant="standard" onChange={e=>dispatch({type:"ZIPCODE",payload:e.target.value})}/>
+            {state.type==="Other"?<TextField className={styles.form_input} inputProps={{ style: { fontSize: 12 } }} id="standard-basic" label="Enter Type of Business *" variant="standard" onChange={e=>setCustomType(e.target.value)} value={customType} />:<></>}
+            <TextField className={styles.form_input} inputProps={{ style: { fontSize: 12 }}} value={state.name} id="standard-basic" label="Name *" variant="standard" onChange={e=>dispatch({type:"NAME",payload:e.target.value})}/>
+            <TextField className={styles.form_input} inputProps={{ style: { fontSize: 12 } }} id="standard-basic" label="Mobile Number" variant="standard" value={state.mobile}/>
+            <TextField inputProps={{ style: { fontSize: 12 } }} className={styles.form_input} id="standard-basic" label="Address *" variant="standard" onChange={e=>dispatch({type:"ADDRESS",payload:e.target.value})}/>
+            <TextField inputProps={{ style: { fontSize: 12 } }} className={styles.form_input} id="standard-basic" label="City *" variant="standard" onChange={e=>dispatch({type:"CITY",payload:e.target.value})}/>
+            <TextField inputProps={{ style: { fontSize: 12 } }} className={styles.form_input} id="standard-basic" label="State *" variant="standard" onChange={e=>dispatch({type:"STATE",payload:e.target.value})}/>
+            <TextField inputProps={{ style: { fontSize: 12 } }} className={styles.form_input} id="standard-basic" label="ZIP *" variant="standard" onChange={e=>dispatch({type:"ZIPCODE",payload:e.target.value})}/>
             <div className={styles.insertLogo}>
               <label htmlFor="image_uploader"> upload business logo</label>
               <div className={styles.image_input}>
@@ -118,7 +134,7 @@ export default function CreateAccount() {
             <button className={styles.submit_btn}>Submit Details</button>
           </form>
         </div>
-        <Image src={logoImg} alt="" width="100%"  height={300} />
+        <Image src={logoImg} alt="none" className={styles.signUp_img} height={300} />
       </div>
     </>
   )

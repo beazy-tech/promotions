@@ -3,7 +3,9 @@ import About from '../Components/About'
 import styles from '@/styles/index.module.scss'
 import HomePage from '../Components/Home'
 import WelcomePage from '@/Components/WelcomePage'
+import { useSelector } from 'react-redux'
 export default function Home() {
+  const userId=useSelector(state=>state.userId.userId);
   return (
     <>
       <Head>
@@ -13,9 +15,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <HomePage/>
-        <About/>
-        <WelcomePage/>
+        {userId.length<=0?<><HomePage/>
+        <About/></>:
+        <WelcomePage/>}
       </main>
     </>
   )

@@ -5,7 +5,7 @@
     position: fixed;
     width:100vw;
     z-index: 999;
-    position: relative;
+    position: fixed;
     padding:1rem;
     align-items: center;
     list-style: none    ;
@@ -56,17 +56,33 @@
     list-style: none;
     background-color:#0a1a44 ;
     color:white;
-    position: absolute;
-    top:4rem;
+    position: fixed;
+    top:4.2rem; 
     height:100vh;
     z-index: 999;
     overflow: hidden;
+    font-size: small;
     .navbar_right_item{
+        width: 20rem;
+        padding:2rem 4rem;
+        border:1px solid white;
+        border-left:none;
+        border-top: none;
+        cursor: pointer;
+        display:flex;
+        align-items: center;
+        gap:0.5rem
+    }
+    .navbar_right_item_list_logout_btn{
         width: 15rem;
         padding:2rem 4rem;
         border:1px solid white;
         border-left:none;
+        border-top: none;
         cursor: pointer;
+        display:flex;
+        align-items: center;
+        gap:0.5rem
     }
 }
 @media screen and (min-width:950px){

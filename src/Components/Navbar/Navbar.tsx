@@ -4,6 +4,14 @@ import logo from '../../utils/Beazy-Logo-image.svg'
 import styles from '@/styles/Navbar.module.scss'
 import Buttons from './Buttons'
 import Link from 'next/link'
+import {useDispatch, useSelector} from 'react-redux'
+import LoginIcon from '@mui/icons-material/Login';
+import { signOutUser } from '@/handlers/handleAuth'
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CreateIcon from '@mui/icons-material/Create';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 interface btnType{
     type:String
 }
@@ -16,7 +24,13 @@ const btn_type:btnType[]=[
     }
 ]
 export default function Navbar() {
-    const [isNavClicked, setisNavClicked] = useState<Boolean>(false);    
+    const [isNavClicked, setisNavClicked] = useState<Boolean>(false);
+    const userId=useSelector(state=>state.userId.userId);
+    const dispatch=useDispatch();
+    const logout=()=>{
+        setisNavClicked(!isNavClicked);
+        signOutUser(dispatch);
+    }
   return (
     <>
     <ul className={styles.Navbar}>
@@ -45,9 +59,17 @@ export default function Navbar() {
         </li> */}
     </ul>
     <ul className={styles.navbar_right_item_list} style={isNavClicked?{width:"15rem",right:"0",transitionDuration:"1s"}:{width:0,right:"0",transitionDuration:"1s"}}>
-        <Link href="/"><li className={styles.navbar_right_item}>Home</li></Link>
-        <Link href="/newpromo"><li className={styles.navbar_right_item}>Create Coupons</li></Link>
-        <Link href="/promolist"><li className={styles.navbar_right_item}>Coupons List</li></Link>
+        <Link href="/"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><HomeIcon color="white"/> Home</li></Link>
+        {userId.length>0?
+        <>
+            <Link href="/newpromo"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><CreateIcon color="white"/> Create Coupons</li></Link>
+            <Link href="/mypromos"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><FormatListBulletedIcon color="white"/>Coupons List</li></Link>
+            <Link href="/"></Link><li className={styles.navbar_right_item_list_logout_btn} onClick={logout}><LogoutIcon color='white'/> <p>Logout</p></li>
+        </>:
+        <>
+            <Link href="/signup"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}> <AccountCircleIcon color="white"/> SignIn</li></Link>
+            <Link href="/login"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><LoginIcon color="white"/> login</li></Link>
+        </>}
     </ul>
     </>
   )

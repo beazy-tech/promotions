@@ -8,6 +8,8 @@ import 'react-calendar/dist/Calendar.css';
 import { format } from 'date-fns';
 import createNewPromotion from '../handlers/createNewPromotion'
 import generateRandomId from '@/handlers/generateRandomId';
+import { useSelector } from 'react-redux';
+import { userIdInfo } from '../../store/userData';
 const categories=[
   "Flat Rs_ Off","Flat_ % discount","Rs _ off on purchases above Rs_","days free trial","Custom message","Brand promotion"
 ]
@@ -47,6 +49,7 @@ const initalState:initalstate={
 }
 export default function createpromo() {
   const [values, onChange]= useState([new Date(), new Date()]);
+  const userId=useSelector(userIdInfo);
   const reducer=(state:initalstate,action:any)=>{
     switch(action.type)
     {
@@ -80,7 +83,7 @@ export default function createpromo() {
     e.preventDefault();
     const dt = new Date();
     const padL = (nr:any, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
-    let time = `${padL(dt.getDate())}/${padL(dt.getMonth() + 1)}/${dt.getFullYear()} ${padL(dt.getHours() > 12 ? dt.getHours() % 12 : dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())} ${padL(dt.getHours() > 12 ? "PM" : "AM")}`;
+    let time = `${padL(dt.getDate())}/${padL(dt.getMonth() + 1)}/${dt.getFullYear()} ${padL(dt.getHours() > 12 ? dt.getHours() % 12 : dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())} ${padL(dt.getHours() > 12 ? "pm" : "am")}`;
     let data={
       category:state.category,
       type:state.type,
@@ -88,17 +91,15 @@ export default function createpromo() {
       validTo:state.validTo,
       id:generateRandomId(),
       message:"",
-      value:state.category==="Rs _ off on purchases above Rs_"?state.discount_of+" * "+state.above_rs:state.value,
+      value:state.category==="Rs _ off on purchases above Rs_"?state.discount_of+"*"+state.above_rs:state.value,
       eventTimeStamp:time,
       eventTimeStampId:Date.now(),
       retailers:[],
       coupons:[]
     };
-    createNewPromotion(data,data.id)
+    createNewPromotion(data,data.id,userId)
 
   }
-  console.log(state);
-  
   return (
     <>
     <div className={styles.newPromotion}>
@@ -120,9 +121,6 @@ export default function createpromo() {
               </div>
               <button className={styles.savePromotion}>Save Promotion</button>
           </form>
-          <div>
-
-          </div>nr
         </div>
     </div>
     </>

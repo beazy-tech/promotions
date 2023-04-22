@@ -1,5 +1,6 @@
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
 import { app } from "../firebaseConfig/config"
+import { setUserData } from "../../store/userData";
 const auth = getAuth(app);
 auth.useDeviceLanguage();
 const onCaptchVerify = () => {
@@ -50,12 +51,11 @@ const onSingup = (contact, setIsOtpSent,resend=false) => {
       });
   }
 };
-
-
 var credentials = "";
-const onOTPVerify = (otp, checkVerified = () => { }) => {
+const onOTPVerify = (otp, setShowPopUp) => {
     window.confirmationResult.confirm(otp).then((res) => {
-        checkVerified()
+        setShowPopUp(false);
+        console.log(res);
     }).catch(err => console.log("error---> ", err))
 }
 const onLoginVerification = async (contact,setIsOtpSent) => {
@@ -63,18 +63,18 @@ const onLoginVerification = async (contact,setIsOtpSent) => {
 }
 
 const checkUserAuth = (dispatch) => {
-    const user = auth.currentUser;
-    if (user) {
-        dispatch(isLoggedIn(true))
-        dispatch(userId(user.phoneNumber))
-    } else {
-        console.log("user is signed out");
-    }
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+        dispatch(setUserData(user?.uid))
+      }
+      else{
+        console.log("User is logged in")
+      }
+    });
 };
 const signOutUser = (dispatch) => {
     signOut(auth).then(() => {
-        dispatch(isLoggedIn(false))
-        dispatch(userInfo({}));
+        dispatch(setUserData(""))
     }).catch((error) => {
     });
 
