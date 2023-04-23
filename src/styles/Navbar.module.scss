@@ -49,6 +49,19 @@
             }
         }
     }
+    .Navbar_right_list{
+        width: fit-content;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        color:white;
+        gap:0.5rem;
+        .Navbar_right_list_item{
+            padding:4px 12px;
+            font-size: small;
+        }
+    }
 }
 .navbar_right_item_list{
     display:flex;

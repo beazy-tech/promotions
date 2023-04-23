@@ -55,7 +55,6 @@ var credentials = "";
 const onOTPVerify = (otp, setShowPopUp) => {
     window.confirmationResult.confirm(otp).then((res) => {
         setShowPopUp(false);
-        console.log(res);
     }).catch(err => console.log("error---> ", err))
 }
 const onLoginVerification = async (contact,setIsOtpSent) => {

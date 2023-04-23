@@ -10,6 +10,7 @@ import createNewPromotion from '../handlers/createNewPromotion'
 import generateRandomId from '@/handlers/generateRandomId';
 import { useSelector } from 'react-redux';
 import { userIdInfo } from '../../store/userData';
+import { EnumType } from 'typescript';
 const categories=[
   "Flat Rs_ Off","Flat_ % discount","Rs _ off on purchases above Rs_","days free trial","Custom message","Brand promotion"
 ]
@@ -26,7 +27,7 @@ interface initalstate{
   validTo:string
 }
 interface data{
-  category:string,
+  category:EnumType,
   type:string,
   validFrom:string,
   validTo:string,
@@ -48,7 +49,7 @@ const initalState:initalstate={
   validTo:format(new Date(), 'dd/MM/yyyy').toString()
 }
 export default function Createpromo() {
-  const [values, onChange]= useState([new Date(), new Date()]);
+  const [values, onChange]= useState([new Date(2017, 0, 1), new Date(2017, 7, 1)]);
   const userId=useSelector(userIdInfo);
   // const formattedValues = values.map(date=> date.toLocaleDateString());
   const reducer=(state:initalstate,action:any)=>{
@@ -72,6 +73,8 @@ export default function Createpromo() {
         return state;
     }
   }
+  console.log(new Date(2017,0,1));
+  
   const [state, dispatch] = useReducer(reducer,initalState);
   useEffect(() => {
     dispatch({type:"ValidFrom",payload:format(values[0], 'dd/MM/yyyy')})

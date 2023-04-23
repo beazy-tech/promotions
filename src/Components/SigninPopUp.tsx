@@ -13,7 +13,6 @@ interface initprops {
     setValue:any
 }
 export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) {
-    
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [otp, setOtp] = useState('');
     const route = useRouter();

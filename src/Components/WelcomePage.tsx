@@ -1,13 +1,23 @@
-import React from 'react'
+import { useState , useEffect } from 'react'
 import styles from '@/styles/welcomePage.module.scss'
 import GrowImg from '../utils/iStock-1094465844lg.jpg'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
+import promoterInfo from '@/handlers/promoterInfo'
 export default function WelcomePage() {
+  const [promoterData,setPromoterData]=useState({name:""});
+  const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId)
+  useEffect(()=>{
+    if(userId.length>0)
+    {
+      promoterInfo(userId,setPromoterData);
+    }
+  },[userId])
   return (
     <>
     <div className={styles.welcomePage}>
-        <h3 className={styles.business_Name}>Welcome <b className={styles.businessName_in_Bold}>{" <Business Name>"}</b></h3>
+        <h3 className={styles.business_Name}>Welcome <b className={styles.businessName_in_Bold}>{promoterData.name}</b></h3>
         <div className={styles.welcomePage_body}>
             <div className={styles.product_promotion}>
                 <p className={styles.text}>Ready to reach new customers with Beazy Promotions?</p>

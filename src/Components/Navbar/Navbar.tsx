@@ -40,6 +40,15 @@ export default function Navbar() {
         </li>
         <li className={styles.Navbar_right}>
             {
+                userId.length>0?
+                    <>
+                <ul className={styles.Navbar_right_list}>
+                    <Link href="/"><li className={styles.Navbar_right_list_item}>Home</li></Link>
+                    <Link href="/newpromo"><li className={styles.Navbar_right_list_item}>Create Coupon</li></Link>
+                    <Link href="/mypromos"><li className={styles.Navbar_right_list_item}>My Promos</li></Link>
+                    <Link href="/"><li onClick={logout} className={styles.Navbar_right_list_item}>Log Out</li></Link>
+                </ul>
+                </>:
                 btn_type.map(({type}:btnType,count)=>(<Buttons key={count} btn_type={type}/>))
             }
         </li>
