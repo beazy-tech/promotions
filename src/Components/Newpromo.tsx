@@ -27,7 +27,7 @@ interface initalstate{
   validTo:string
 }
 interface data{
-  category:EnumType,
+  category:string,
   type:string,
   validFrom:string,
   validTo:string,
