@@ -1,5 +1,5 @@
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
-import {db,app} from "../firebaseConfig/config"
+import {app} from "../firebaseConfig/config"
 import { setUserData } from "../../store/userData";
 const auth = getAuth(app);
 auth.useDeviceLanguage();

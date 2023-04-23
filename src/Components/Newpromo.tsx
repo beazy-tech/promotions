@@ -9,7 +9,6 @@ import { format } from 'date-fns';
 import createNewPromotion from '../handlers/createNewPromotion'
 import generateRandomId from '@/handlers/generateRandomId';
 import { useSelector } from 'react-redux';
-import { userIdInfo } from '../../store/userData';
 const categories=[
   "Flat Rs_ Off","Flat_ % discount","Rs _ off on purchases above Rs_","days free trial","Custom message","Brand promotion"
 ]
@@ -49,7 +48,7 @@ const initalState:initalstate={
 }
 export default function Createpromo() {
   const [values, onChangeValue]= useState([new Date(),new Date()]);
-  const userId=useSelector(userIdInfo);
+  const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId);
   const reducer=(state:initalstate,action:any)=>{
     switch(action.type)
     {

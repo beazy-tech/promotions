@@ -6,7 +6,6 @@ import Image from 'next/image';
 import SigninPopUp from '@/Components/SigninPopUp';
 import createPromoterAccount from '../handlers/createPromoterAccount.js';
 import { useSelector } from 'react-redux';
-import { userIdInfo } from '../../store/userData';
 import { useRouter } from 'next/router';
 interface initalData{
   address:string,
@@ -33,7 +32,7 @@ export default function CreateAccount() {
   const [image, setImage] = useState<string>("");
   const [showPopUp,setShowPopUp]=useState(true);
   const [value, setValue] = useState("");
-  const userId=useSelector(userIdInfo);
+  const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId);
   const route = useRouter();
   const reducer=(state:initalData,action:any)=>{
     switch(action.type){
