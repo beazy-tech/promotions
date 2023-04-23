@@ -45,13 +45,12 @@ const initalState:initalstate={
   value:"",
   discount_of:"",
   above_rs:"",
-  validFrom:format(new Date(), 'dd/MM/yyyy').toString(),
-  validTo:format(new Date(), 'dd/MM/yyyy').toString()
+  validFrom:format(new Date(), 'dd/MM/yyyy'),
+  validTo:format(new Date(), 'dd/MM/yyyy')
 }
 export default function Createpromo() {
-  const [values, onChange]= useState([new Date(2017, 0, 1), new Date(2017, 7, 1)]);
+  const [values, onChangeValue]= useState<[Date | number, Date | number]>([new Date(),new Date()]);
   const userId=useSelector(userIdInfo);
-  // const formattedValues = values.map(date=> date.toLocaleDateString());
   const reducer=(state:initalstate,action:any)=>{
     switch(action.type)
     {
@@ -73,16 +72,15 @@ export default function Createpromo() {
         return state;
     }
   }
-  console.log(new Date(2017,0,1));
   
   const [state, dispatch] = useReducer(reducer,initalState);
   useEffect(() => {
     dispatch({type:"ValidFrom",payload:format(values[0], 'dd/MM/yyyy')})
     dispatch({type:"ValidTo",payload:format(values[1], 'dd/MM/yyyy')})
   }, [values])
-  const handleSelect=(range:any)=>{
-    onChange(range)
-  }
+  const handleSelect = (value: [ Date | number, Date | number]) => {
+    onChangeValue(value);
+  };
   const handleSubmit=(e:any)=>{
     e.preventDefault();
     const dt = new Date();
@@ -102,8 +100,7 @@ export default function Createpromo() {
       coupons:[]
     };
     createNewPromotion(data,data.id,userId)
-
-  }
+  }  
   return (
     <>
     <div className={styles.newPromotion}>
@@ -121,7 +118,7 @@ export default function Createpromo() {
               }
               <div className={styles.date_rangePicker}>
                 <p className={styles.validate_picker_label}>Validatity</p>
-                <DateRangePicker onChange={handleSelect} minDate={new Date()} format='dd/MM/yyyy' className={styles.daterangePicker} required={true} clearIcon={null} value={values} />
+                <DateRangePicker onChange={handleSelect} minDate={new Date()} format='dd/MM/yyyy' className={styles.daterangePicker} required={true} clearIcon={null} value={[values[0].toString(), values[1].toString()]} />
               </div>
               <button className={styles.savePromotion}>Save Promotion</button>
           </form>
