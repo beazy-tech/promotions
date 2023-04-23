@@ -49,7 +49,7 @@ const initalState:initalstate={
   validTo:format(new Date(), 'dd/MM/yyyy')
 }
 export default function Createpromo() {
-  const [values, onChangeValue]= useState<[Date | number, Date | number]>([new Date(),new Date()]);
+  const [values, onChangeValue]= useState<any>([new Date(),new Date()]);
   const userId=useSelector(userIdInfo);
   const reducer=(state:initalstate,action:any)=>{
     switch(action.type)
@@ -78,7 +78,8 @@ export default function Createpromo() {
     dispatch({type:"ValidFrom",payload:format(values[0], 'dd/MM/yyyy')})
     dispatch({type:"ValidTo",payload:format(values[1], 'dd/MM/yyyy')})
   }, [values])
-  const handleSelect = (value: [ Date | number, Date | number]) => {
+  const handleSelect = (value:any) => {
+    
     onChangeValue(value);
   };
   const handleSubmit=(e:any)=>{
@@ -118,7 +119,7 @@ export default function Createpromo() {
               }
               <div className={styles.date_rangePicker}>
                 <p className={styles.validate_picker_label}>Validatity</p>
-                <DateRangePicker onChange={handleSelect} minDate={new Date()} format='dd/MM/yyyy' className={styles.daterangePicker} required={true} clearIcon={null} value={[values[0].toLocaleString(), values[1].toLocaleString()]} />
+                <DateRangePicker onChange={handleSelect} minDate={new Date()} format='dd/MM/yyyy' className={styles.daterangePicker} required={true} clearIcon={null} value={[values[0], values[1]]} />
               </div>
               <button className={styles.savePromotion}>Save Promotion</button>
           </form>
