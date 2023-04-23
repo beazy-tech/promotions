@@ -79,7 +79,7 @@ export default function Createpromo() {
     // dispatch({type:"ValidFrom",payload:format(values[0], 'dd/MM/yyyy')})
     // dispatch({type:"ValidTo",payload:format(values[1], 'dd/MM/yyyy')})
   }, [values])
-  const handleSelect = (value:any) => {
+  const handleSelect = (value:any | void) => {
     onChangeValue(value);
   };
   const handleSubmit=(e:any)=>{
