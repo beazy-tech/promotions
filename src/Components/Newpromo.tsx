@@ -11,6 +11,7 @@ import generateRandomId from '@/handlers/generateRandomId';
 import { useSelector } from 'react-redux';
 import { userIdInfo } from '../../store/userData';
 import { EnumType } from 'typescript';
+import { Value } from 'react-phone-number-input';
 const categories=[
   "Flat Rs_ Off","Flat_ % discount","Rs _ off on purchases above Rs_","days free trial","Custom message","Brand promotion"
 ]
@@ -78,8 +79,7 @@ export default function Createpromo() {
     // dispatch({type:"ValidFrom",payload:format(values[0], 'dd/MM/yyyy')})
     // dispatch({type:"ValidTo",payload:format(values[1], 'dd/MM/yyyy')})
   }, [values])
-  const handleSelect = (value:[Date | string, Date | string]) => {
-    
+  const handleSelect = (value:any) => {
     onChangeValue(value);
   };
   const handleSubmit=(e:any)=>{
