@@ -49,7 +49,7 @@ const initalState:initalstate={
   validTo:format(new Date(), 'dd/MM/yyyy')
 }
 export default function Createpromo() {
-  const [values, onChangeValue]= useState<any>([new Date(),new Date()]);
+  const [values, onChangeValue]= useState<[string | Date,Date | string]>([new Date(),new Date()]);
   const userId=useSelector(userIdInfo);
   const reducer=(state:initalstate,action:any)=>{
     switch(action.type)
@@ -75,10 +75,10 @@ export default function Createpromo() {
   
   const [state, dispatch] = useReducer(reducer,initalState);
   useEffect(() => {
-    dispatch({type:"ValidFrom",payload:format(values[0], 'dd/MM/yyyy')})
-    dispatch({type:"ValidTo",payload:format(values[1], 'dd/MM/yyyy')})
+    // dispatch({type:"ValidFrom",payload:format(values[0], 'dd/MM/yyyy')})
+    // dispatch({type:"ValidTo",payload:format(values[1], 'dd/MM/yyyy')})
   }, [values])
-  const handleSelect = (value:any) => {
+  const handleSelect = (value:[Date | string, Date | string]) => {
     
     onChangeValue(value);
   };
