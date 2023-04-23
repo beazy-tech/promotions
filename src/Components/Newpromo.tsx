@@ -10,8 +10,6 @@ import createNewPromotion from '../handlers/createNewPromotion'
 import generateRandomId from '@/handlers/generateRandomId';
 import { useSelector } from 'react-redux';
 import { userIdInfo } from '../../store/userData';
-import { EnumType } from 'typescript';
-import { Value } from 'react-phone-number-input';
 const categories=[
   "Flat Rs_ Off","Flat_ % discount","Rs _ off on purchases above Rs_","days free trial","Custom message","Brand promotion"
 ]
