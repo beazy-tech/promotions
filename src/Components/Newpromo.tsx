@@ -119,7 +119,7 @@ export default function Createpromo() {
               }
               <div className={styles.date_rangePicker}>
                 <p className={styles.validate_picker_label}>Validatity</p>
-                <DateRangePicker onChange={handleSelect} minDate={new Date()} format='dd/MM/yyyy' className={styles.daterangePicker} required={true} clearIcon={null} value={[values[0], values[1]]} />
+                {/* <DateRangePicker onChange={handleSelect} minDate={new Date()} format='dd/MM/yyyy' className={styles.daterangePicker} required={true} clearIcon={null} value={[values[0], values[1]]} /> */}
               </div>
               <button className={styles.savePromotion}>Save Promotion</button>
           </form>
