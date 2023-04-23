@@ -25,7 +25,7 @@ const btn_type:btnType[]=[
 ]
 export default function Navbar() {
     const [isNavClicked, setisNavClicked] = useState<Boolean>(false);
-    const userId=useSelector(state=>state.userId.userId);
+    const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId);
     const dispatch=useDispatch();
     const logout=()=>{
         setisNavClicked(!isNavClicked);
@@ -59,16 +59,16 @@ export default function Navbar() {
         </li> */}
     </ul>
     <ul className={styles.navbar_right_item_list} style={isNavClicked?{width:"15rem",right:"0",transitionDuration:"1s"}:{width:0,right:"0",transitionDuration:"1s"}}>
-        <Link href="/"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><HomeIcon color="white"/> Home</li></Link>
+        <Link href="/"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><HomeIcon sx={{color:'white'}}/> Home</li></Link>
         {userId.length>0?
         <>
-            <Link href="/newpromo"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><CreateIcon color="white"/> Create Coupons</li></Link>
-            <Link href="/mypromos"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><FormatListBulletedIcon color="white"/>Coupons List</li></Link>
-            <Link href="/"></Link><li className={styles.navbar_right_item_list_logout_btn} onClick={logout}><LogoutIcon color='white'/> <p>Logout</p></li>
+            <Link href="/newpromo"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><CreateIcon sx={{color:'white'}}/> Create Coupons</li></Link>
+            <Link href="/mypromos"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><FormatListBulletedIcon sx={{color:'white'}}/>Coupons List</li></Link>
+            <Link href="/"></Link><li className={styles.navbar_right_item_list_logout_btn} onClick={logout}><LogoutIcon sx={{color:'white'}}/> <p>Logout</p></li>
         </>:
         <>
-            <Link href="/signup"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}> <AccountCircleIcon color="white"/> SignIn</li></Link>
-            <Link href="/login"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><LoginIcon color="white"/> login</li></Link>
+            <Link href="/signup"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}> <AccountCircleIcon sx={{color:'white'}}/> SignIn</li></Link>
+            <Link href="/login"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><LoginIcon sx={{color:'white'}}/> login</li></Link>
         </>}
     </ul>
     </>

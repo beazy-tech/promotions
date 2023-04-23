@@ -3,7 +3,7 @@ import styles from '@/styles/acountCards.module.scss'
 import Image from 'next/image'
 
 interface AboutCardsProps{
-  image:string
+  image:any,
   heading:string,
   description:string
 }

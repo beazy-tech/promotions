@@ -9,7 +9,7 @@ interface initprops{
     value:string
 }
 export default function Input({Lable,Type,Placeholder,required,dispatch,value}:initprops) { 
-  const handleChange=(e)=>{
+  const handleChange=(e:any)=>{
     if(Lable==="Discount")
     {
       dispatch({type:"VALUE",payload:e.target.value})

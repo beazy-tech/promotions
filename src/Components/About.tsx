@@ -35,7 +35,7 @@ export default function About() {
     <div className={styles.about_body}>
         <div className={styles.about_head}>
             <h2 className={styles.about_heading}>REACH MORE CUSTOMER WITH BEAZY PROMOTIONS.</h2>
-            <p className={styles.about_description}>Beazy PromoReceipts is the ultimate platform for businesses to <b>unlock the power</b> of promotional marketing. Imagine having your promotions printed directly `on customer receipts - a highly effective and proven strategy to <b>boost sales, increase customer loyalty, and grow your business</b>. With <b> Beazy PromoReceipts </b>, it's now possible!</p>
+            <p className={styles.about_description}>Beazy PromoReceipts is the ultimate platform for businesses to <b>unlock the power</b> of promotional marketing. Imagine having your promotions printed directly on customer receipts - a highly effective and proven strategy to <b>boost sales, increase customer loyalty, and grow your business</b>. With <b> Beazy PromoReceipts </b>, it's now possible!</p>
         </div>
         <div className={styles.about_body}>
             {AboutCardData.map(({image,heading,description}:AboutCardData,count)=>(<AboutCards key={count} image={image} heading={heading} description={description}/>))}

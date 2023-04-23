@@ -10,7 +10,7 @@ import EditIcon from '@mui/icons-material/Edit';
 interface initprops {
     setShowPopUp: Function,
     value:string,
-    setValue:Function
+    setValue:any
 }
 export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) {
     

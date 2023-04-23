@@ -5,7 +5,7 @@ interface props{
     Name:string,
     types:Array<string>,
     dispatch:Function,
-    State:object
+    State:any
 }
 export default function SelectionInput({Label,Name,types,dispatch,State}:props) {
   return (
