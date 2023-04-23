@@ -1,5 +1,5 @@
 import { doc, setDoc, getDoc } from '@firebase/firestore';
-import db from '../firebaseConfig/config';
+import {db} from '../firebaseConfig/config';
 const createNewPromotion = async (testData = {},id="",uid="") => {
   const writeDoc = doc(db, `promoter/${uid}/promotion`,id);
   try {

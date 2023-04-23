@@ -11,12 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { useSelector } from 'react-redux';
-import { userIdInfo } from '../../store/userData';
 import promoterInfo from '@/handlers/promoterInfo';
 import promotionData from '@/handlers/promotionData';
-import db from '@/firebaseConfig/config';
-import {useCollectionData} from 'react-firebase-hooks/firestore'
-import { collection } from '@firebase/firestore';
 interface data{
     datas:any,
     loading:boolean,

@@ -1,5 +1,5 @@
 import { doc, setDoc, getDoc } from '@firebase/firestore';
-import db from '../firebaseConfig/config';
+import {db} from '../firebaseConfig/config';
 const promoterInfo = async (uid:string,setPromoterData:Function) => {
   const readDoc = doc(db, `promoter/${uid}`);
   try {

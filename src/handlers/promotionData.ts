@@ -1,5 +1,5 @@
 import { doc, getDocs,collection } from '@firebase/firestore';
-import db from '../firebaseConfig/config';
+import {db} from '../firebaseConfig/config';
 const promotionData = async (uid:string,setPromotionInfo:Function) => {
   const readDoc = collection(db, `promoter/${uid}/promotion`);
   try {

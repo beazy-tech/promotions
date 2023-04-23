@@ -1,5 +1,5 @@
 import { doc, setDoc, getDoc } from '@firebase/firestore';
-import db from '../firebaseConfig/config';
+import {db} from '../firebaseConfig/config';
 const createPromoterAccount = async (testData = {},id) => {
   const readDoc = doc(db, `promoter/${id}`);
   const writeDoc = doc(db, `promoter`,id);
