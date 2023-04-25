@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  sassOptions:{
-    fiber:false,
-  }
+  // sassOptions:{
+  //   fiber:false,
+  // }
 }
 module.exports=nextConfig;

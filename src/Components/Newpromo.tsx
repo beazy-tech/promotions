@@ -93,6 +93,7 @@ export default function Createpromo() {
       message:"",
       value:state.category==="Rs _ off on purchases above Rs_"?state.discount_of+"*"+state.above_rs:state.value,
       eventTimeStamp:time,
+      totalRedeemedCoupon:0,
       eventTimeStampId:Date.now(),
       retailers:[],
       coupons:[]

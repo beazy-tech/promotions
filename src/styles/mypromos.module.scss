@@ -5,6 +5,10 @@
     display:flex;
     flex-direction: column;
     gap:2rem;
+    @media screen and (min-width:950px)
+    {
+        padding:6rem 1rem;
+    }
     .mypromos_head{
         width:100%;
         display:flex;
@@ -13,6 +17,11 @@
         .myPromos_head_heading{
             font-weight: 500;
             font-size: x-large;
+            @media screen and (min-width:950px)
+            {
+                font-weight: 500;
+                font-size: xx-large;
+            }
         }
         .myPromos_head_right{
             display:flex;
@@ -34,6 +43,11 @@
                     font-weight: 600;
                     border-radius: 6px;
                     cursor: pointer;
+                    @media screen and (min-width:950px)
+                    {
+                        font-size: small;
+                        padding:8px 16px;
+                    }
                 }
             }
             .myPromos_head_right_item{
@@ -42,6 +56,11 @@
                     width:20px;
                     height:20px;
                     border-radius: 50%;
+                    @media screen and (min-width:950px)
+                    {
+                        width:40px;
+                        height:40px;
+                    }
                 }
             }
         }
@@ -52,6 +71,10 @@
             align-items: center;
             justify-content: center;
             gap:1rem;
+            @media screen and (min-width:950px)
+            {
+                justify-content: start;
+            }
             .mypromos_body_head_btn{
                 width: fit-content;
                 background-color: grey;
@@ -60,6 +83,10 @@
                 padding:6px 32px;
                 border-radius: 12px;
                 cursor: pointer;
+                @media screen and (min-width:950px)
+                {
+                    padding:6px 24px;
+                }
             }
             .mypromos_body_head_btn_active{
                 background-color: black;
@@ -69,6 +96,10 @@
                 padding:6px 32px;
                 border-radius: 12px;
                 cursor: pointer;
+                @media screen and (min-width:950px)
+                {
+                    padding:6px 24px;
+                }
             }
         }
         .mypromos_body_main{
@@ -76,6 +107,11 @@
             overflow: auto;
             max-height:60vh;
             overflow: auto;
+            @media screen and (min-width:950px)
+            {
+                padding-top:2rem;
+                overflow: auto;
+            }
             .validate_info_graph{
                 width: fit-content;
                 background-color: transparent;
@@ -91,46 +127,4 @@
             }
         }
     }
-}
-@media screen and (min-width:950px)
-{
-    .mypromos{
-        padding:6rem 1rem;
-    .mypromos_head{
-        .myPromos_head_heading{
-            font-weight: 500;
-            font-size: xx-large;
-        }
-        .myPromos_head_right{
-            .myPromos_head_right_item{
-                .myPromos_head_right_btn{
-                    font-size: small;
-                    padding:8px 16px;
-
-                }
-            }
-            .myPromos_head_right_item{
-                .myPromos_head_img{
-                    width:40px;
-                    height:40px;
-                }
-            }
-        }
-    }
-    .mypromos_body{
-        .mypromos_body_head{
-            justify-content: start;
-            .mypromos_body_head_btn{
-                padding:6px 24px;
-            }
-            .mypromos_body_head_btn_active{
-                padding:6px 24px;
-            }
-        }
-        .mypromos_body_main{
-            padding-top:2rem;
-            overflow: auto;
-        }
-    }
-}
 }

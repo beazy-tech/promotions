@@ -6,8 +6,16 @@
     display:flex;
     flex-direction: column;
     gap:5rem;
+    @media screen and (min-width:950px)
+    {
+        padding:1rem;
+    }
     .newPromotion_heading{
         padding-left:1rem;   
+        @media screen and (min-width:950px)
+        {
+            padding-left:4rem;
+        }
     }
     .newPromotion_body{
         display:flex;

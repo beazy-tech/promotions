@@ -10,13 +10,14 @@ const validateCoupon = async (uid:string,promotionId:string,couponCode:string,se
             }
             let data=sfDoc.data();
             let coupons=data.coupons;
+            let totalRedeemedCoupon=data.totalRedeemedCoupon;
             if(coupons.length>0)
             {
                 let newCouponList:any=[];
                 coupons.map((item:any)=>{
                     item.couponId===couponCode?newCouponList.push({...item,redeemed:true}):newCouponList.push(item);
                 })
-                transaction.update(readDoc, {coupons:newCouponList});
+                transaction.update(readDoc, {coupons:newCouponList,totalRedeemedCoupon:totalRedeemedCoupon+1});
                 setIsRedeemed(true);
                 return
             }

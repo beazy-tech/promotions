@@ -5,6 +5,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    @media screen and (min-width:950px)
+    {
+        padding-top:8rem;
+    }
     .createAccount_left{
         display:flex;
         backdrop-filter: blur(10px);
@@ -25,7 +29,10 @@
             gap:0.2rem;
             align-items: center;
             .form_input{
-                width:80% !important
+                width:80% !important;
+                @media screen and (min-width:950px){
+                    width:40% !important
+                }
             }
             .insertLogo{
                 padding-top:1rem;
@@ -53,19 +60,8 @@
     }
     .signUp_img{
         display:none;
-    }
-}
-@media screen and (min-width:950px) {
-    .createAccount{
-        padding-top:8rem;
-        .createAccount_left{
-            .createAccount_form{
-                .form_input{
-                    width:40% !important
-                }
-            }
-        }
-        .signUp_img{
+        @media screen and (min-width:950px)
+        {
             display:block;
             width: fit-content;
         }

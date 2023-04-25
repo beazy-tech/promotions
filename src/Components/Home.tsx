@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
+import img from '../utils/Screenshot_from_2023-04-18_15-30-38-removebg-preview.png'
+import Image from 'next/image'
 export default function Home() {
   return (
     <>
@@ -14,7 +16,7 @@ export default function Home() {
         </Link>
       </div>
       <div className={styles.Home_right}>
-        {/* <Image src={Img} alt="none"/> */}
+        <Image src={img} alt="none" className={styles.Home_right_images}/>
       </div>
     </div>
     </>

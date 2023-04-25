@@ -1,19 +1,39 @@
 .Home{
+  display:flex;
   width:100vw;
-  height:100vh;
+  height:100%;
   background-color: #0a1a44;
-  padding:12rem 0rem;
+  align-items: center;
+  padding:6rem 0rem;
+  flex-direction: column-reverse;
+  gap:4rem;
+  justify-content: space-between;
+  @media screen and (min-width:950px)
+  {
+    gap:0;
+    flex-direction: row;
+    padding:8rem 12rem;
+  }
   .Home_left{
     display:flex;
     width: 100vw;
     padding:0 1rem;
     flex-direction: column;
     gap:8rem;
+    @media screen and (min-width:950px){
+      width: 40vw;
+      padding:0;
+    }
     .home_body_tag{
       font-weight: 100;
       color:white;
       font-size: 4rem;
       text-align: center;
+      @media screen and (min-width:950px)
+      {
+        max-width: 100%;
+        text-align: start;
+      }
     }
     .create_account_btn{
       padding:12px 3rem;
@@ -24,28 +44,25 @@
       background-color: #075e7a;
       color: white;
       font-weight: 100;
-    }
-  }
-  // .Home_right{
-  // }
-}
-@media screen and (min-width:950px)
-{
-  .Home{
-    padding:8rem 1rem;
-    .Home_left{
-      width: 40vw;
-      padding:0;
-      .home_body_tag{
-        max-width: 100%;
-        text-align: start;
-      }
-      .create_account_btn{
+      @media screen and (min-width:950px)
+      {
         width: fit-content;
         padding:12px 3rem;
       }
     }
-    // .Home_right{
-    // }
+  }
+  .Home_right{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    @media screen and (min-width:950px)
+    {
+      padding-top:4rem;
+
+    }
+    .Home_right_images{
+      height: 400px;
+      width:200px;
+    }
   }
 }

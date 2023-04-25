@@ -44,7 +44,7 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
                             <div className={styles.otp_head}>
                                 <p className={styles.otp_label}>Enter Otp send on:</p>
                                 <div className={styles.otp_sent_number}>
-                                    <b className={styles.contact_number}>+91-9536586259</b>
+                                    <b className={styles.contact_number}>+91-{value.split("+91")}</b>
                                     <button className={styles.phone_Number_change_btn}><EditIcon sx={{fontSize:10,color:"green"}}/></button>
                                 </div>
                             </div>

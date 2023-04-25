@@ -8,7 +8,11 @@
     position: fixed;
     padding:1rem;
     align-items: center;
-    list-style: none    ;
+    list-style: none;
+    @media screen and (min-width:950px)
+    {
+        width:100%;
+    }
     .Navbar_left{
         display:flex;
         align-items: center;
@@ -21,10 +25,21 @@
             font-weight: 100;
             font-size: large;
             color:white;
+            @media screen and (min-width:950px)
+            {
+                font-size: x-larger;
+            }
         }
     }
     .Navbar_right{
         display:none;
+        @media screen and (min-width:950px)
+        {
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            gap:2rem;
+        }
     }
     .MobileNavbar_right{
         position: absolute;
@@ -35,6 +50,10 @@
         z-index: 999;
         right:2rem;
         background-color: #0a1a44;
+        @media screen and (min-width:950px)
+        {
+            display:none;
+        }
         .MobileNavbar_icon{
             list-style: none;
             display:flex;
@@ -71,6 +90,10 @@
     color:white;
     position: fixed;
     top:4.2rem; 
+    @media screen and (min-width:950px)
+    {
+        display:none;
+    }
     height:100vh;
     z-index: 999;
     overflow: hidden;
@@ -97,41 +120,4 @@
         align-items: center;
         gap:0.5rem
     }
-}
-@media screen and (min-width:950px){
-.Navbar{
-    display:flex;
-    justify-content: space-between;
-    background-color: #0a1a44;
-    position: fixed;
-    width:100%;
-    z-index: 999;
-    padding:1rem;
-    .Navbar_left{
-        display:flex;
-        align-items: center;
-        gap:1rem;
-        .logoImg{
-            width:40px;
-            height:40px;
-        }
-        .branding{
-            font-weight: 100;
-            font-size: x-larger;
-            color:white;
-        }
-    }
-    .Navbar_right{
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
-        gap:2rem;
-    }
-    .MobileNavbar_right{
-        display:none;   
-    }
-   }
-   .navbar_right_item_list{
-    display:none;
-   }
 }
