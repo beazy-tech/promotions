@@ -24,7 +24,7 @@
         align-items: center;
         @media screen and (min-width:950px)
         {
-            font-size: xxx-large;
+            font-size: 4rem;
             flex-direction: row;
             align-items: start;
             gap:12px;
@@ -70,6 +70,10 @@
                 color:white;
                 cursor: pointer;
                 font-weight: 600;
+                @media screen and (min-width:950px)
+                {
+                    font-size: large;
+                }
             }
         }
         .promotional_image{
@@ -78,7 +82,7 @@
             box-shadow: 2px 2px 100px 0 white;
             @media screen and (min-width:950px)
             {
-                width:400px;
+                width:600px;
             }
         }
     }

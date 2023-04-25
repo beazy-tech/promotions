@@ -1,0 +1,44 @@
+.aboutCard{
+    border:2px solid #534b7e;
+    width: fit-content;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:1rem;
+    margin:1rem;
+    @media screen and (min-width:950px)
+    {
+        width:400px;
+        height:550px;
+        margin:0;
+    }
+    .aboutCardImg{
+        width:250px;
+        height:250px;
+    }
+    .acountCard_body{
+        display:flex;
+        flex-direction: column;
+        width: fit-content;
+        align-items: center;
+        gap:1rem;
+        .accountCard_heading{
+            font-weight: 600;
+            font-size: medium;
+            @media screen and (min-width:950px)
+            {
+                font-size: xx-large;
+            }
+        }
+        .accountCard_description{
+            font-size: x-small;
+            text-align: center;
+            width: fit-content;
+            @media screen and (min-width:950px)
+            {
+                font-size: large;
+            }
+        }
+    }
+}

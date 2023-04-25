@@ -1,42 +1,48 @@
-.Home{
-  display:flex;
-  width:100vw;
-  height:100%;
+.Home {
+  display: flex;
+  width: 100vw;
+  height: 100%;
   background-color: #0a1a44;
   align-items: center;
-  padding:6rem 0rem;
+  padding: 6rem 0rem;
   flex-direction: column-reverse;
-  gap:4rem;
-  justify-content: space-between;
-  @media screen and (min-width:950px)
-  {
-    gap:0;
+  gap: 4rem;
+  justify-content: space-evenly;
+
+  @media screen and (min-width:950px) {
+    height:100vh;
+    gap: 0;
     flex-direction: row;
-    padding:8rem 12rem;
+    padding: 8rem 12rem;
   }
-  .Home_left{
-    display:flex;
+
+  .Home_left {
+    display: flex;
     width: 100vw;
-    padding:0 1rem;
+    padding: 0 1rem;
     flex-direction: column;
-    gap:8rem;
-    @media screen and (min-width:950px){
+    gap: 8rem;
+
+    @media screen and (min-width:950px) {
       width: 40vw;
-      padding:0;
+      padding: 0;
     }
-    .home_body_tag{
+
+    .home_body_tag {
       font-weight: 100;
-      color:white;
+      color: white;
       font-size: 4rem;
       text-align: center;
-      @media screen and (min-width:950px)
-      {
+
+      @media screen and (min-width:950px) {
         max-width: 100%;
         text-align: start;
+        font-size: 6rem;
       }
     }
-    .create_account_btn{
-      padding:12px 3rem;
+
+    .create_account_btn {
+      padding: 12px 3rem;
       border-radius: 12px;
       border: none;
       width: 100%;
@@ -44,25 +50,33 @@
       background-color: #075e7a;
       color: white;
       font-weight: 100;
-      @media screen and (min-width:950px)
-      {
+
+      @media screen and (min-width:950px) {
         width: fit-content;
-        padding:12px 3rem;
+        font-size: larger;
+        padding: 12px 4rem;
       }
     }
   }
-  .Home_right{
-    display:flex;
+
+  .Home_right {
+    display: flex;
     align-items: center;
     justify-content: center;
-    @media screen and (min-width:950px)
-    {
-      padding-top:4rem;
+
+    @media screen and (min-width:950px) {
+      padding-top: 4rem;
 
     }
-    .Home_right_images{
+
+    .Home_right_images {
       height: 400px;
-      width:200px;
+      width: 200px;
+      @media screen and (min-width:950px)
+      {
+        height: 500px;
+        width: 250px;
+      }
     }
   }
 }

@@ -9,17 +9,27 @@
     @media screen and (min-width:950px)
     {
         padding:1rem;
+        padding-top:12rem;
     }
     .newPromotion_heading{
         padding-left:1rem;   
         @media screen and (min-width:950px)
         {
+            font-size: xxx-large;
             padding-left:4rem;
         }
     }
     .newPromotion_body{
         display:flex;
         justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        gap:3rem;
+        @media screen and (min-width:950px)
+        {
+            gap:0;
+            flex-direction: row;
+        }
         .promotionForm{
             width:fit-content;
             display:flex;
@@ -50,16 +60,12 @@
                 background-color: black;
                 color:white; 
                 margin: auto;
-                cursor: pointer;   
+                cursor: pointer;
+                @media screen and (min-width:950px)
+                {
+                    font-size: large;
+                }   
             }
         }
     }
-}
-@media screen and (min-width:950px) {
-    .newPromotion{
-        padding:1rem;
-        .newPromotion_heading{
-            padding-left:4rem;   
-        }
-    }   
 }

@@ -7,6 +7,10 @@
         font-weight: 700;
         font-size: small;
         font-family: 'Noto Sans Lepcha', sans-serif;
+        @media screen and (min-width:950px)
+        {
+            font-size: large;
+        }
     }
     .CustomerInputText{
         width:300px;
@@ -15,6 +19,11 @@
         font-size: xx-small;
         outline: none;
         border:none;
+        @media screen and (min-width:950px)
+        {
+            width:175px;
+            font-size: large;
+        }
     }
     .CustomInputNumber{
         width:125px;
@@ -23,5 +32,10 @@
         font-size: xx-small;
         outline: none;
         border:none;
+        @media screen and (min-width:950px)
+        {
+            width:175px;
+            font-size: large;
+        }
     }
 }

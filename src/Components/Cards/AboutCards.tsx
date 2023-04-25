@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/styles/acountCards.module.scss'
+import styles from '@/styles/accountCards.module.scss'
 import Image from 'next/image'
 
 interface AboutCardsProps{

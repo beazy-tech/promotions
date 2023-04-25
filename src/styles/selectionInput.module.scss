@@ -6,6 +6,10 @@
     .label{
         font-weight: 600;
         font-size: smaller;
+        @media screen and (min-width:950px)
+        {
+            font-size: large;
+        }
     }
     .selectType{
         width: 300px;
@@ -15,6 +19,11 @@
         font-family: 'Dongle', sans-serif;
         font-size: medium;
         outline:1px solid gray;
+        @media screen and (min-width:950px)
+        {
+            width:350px;
+            font-size: large;
+        }
         .option{
             border-radius: 20px;
         }

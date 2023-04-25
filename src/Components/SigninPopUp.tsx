@@ -30,22 +30,22 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
         <>
             <div className={styles.signInPopup}>
                 <div className={styles.signInPopup_body}>
-                    <form className={styles.login_singup_form} style={isOtpSent?{right:"35rem",transitionDuration:"1s"}:{transitionDuration:"1s"}} onSubmit={e => e.preventDefault()}>
+                    <form className={styles.login_singup_form} style={isOtpSent?{right:"50rem",transitionDuration:"1s"}:{transitionDuration:"1s"}} onSubmit={e => e.preventDefault()}>
                         <div className={styles.phone_input_block}> 
                             <label className={styles.inputLabel} htmlFor="phone_number">Enter your Phone number</label>
                             <div className={styles.phone_number_input_box}>
-                                <PhoneInput id="phone_number" placeholder="Enter here..." value={value} onChange={setValue} defaultCountry="IN" />
+                                <PhoneInput id="phone_number" placeholder="Enter here..." value={value} onChange={setValue} country="IN" defaultCountry='IN' />
                             </div>
                         </div>
                         <button id="sign_up_button" onClick={signUp} className={styles.sign_up_btn}>Sign up</button>
                     </form>
-                    <form onSubmit={e=>e.preventDefault()} className={styles.otp_verification_code_form} style={isOtpSent?{transitionDuration:"1s"}:{left:"35rem",transitionDuration:"1s"}}>
+                    <form onSubmit={e=>e.preventDefault()} className={styles.otp_verification_code_form} style={isOtpSent?{transitionDuration:"1s"}:{left:"50rem",transitionDuration:"1s"}}>
                         <div className={styles.otp_box}>
                             <div className={styles.otp_head}>
                                 <p className={styles.otp_label}>Enter Otp send on:</p>
                                 <div className={styles.otp_sent_number}>
-                                    <b className={styles.contact_number}>+91-{value.split("+91")}</b>
-                                    <button className={styles.phone_Number_change_btn}><EditIcon sx={{fontSize:10,color:"green"}}/></button>
+                                    <b className={styles.contact_number}>+91-{value?.split("+91")}</b>
+                                    <button className={styles.phone_Number_change_btn}><EditIcon sx={{fontSize:12,color:"green"}}/></button>
                                 </div>
                             </div>
                             <OtpInput
