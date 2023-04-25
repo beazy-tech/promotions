@@ -13,6 +13,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { useSelector } from 'react-redux';
 import promoterInfo from '@/handlers/promoterInfo';
 import promotionData from '@/handlers/promotionData';
+import CouponVerification from './CouponVerification';
 interface data{
     datas:any,
     loading:boolean,
@@ -21,32 +22,42 @@ interface data{
 export default function Mypromos() {
     const [IsActiivePromoActive, setIsActiivePromoActive] = useState(true);
     const [PromoterData,setPromoterData]:[any,Function]=useState({})
-    const [PromotionInfo,setPromotionInfo]:[Array<{eventTimeStamp:string,validTo:string}>,Function]=useState([])
+    const [PromotionsInfo,setPromotionsInfo]:[Array<{eventTimeStamp:string,validTo:string}>,Function]=useState([])
     const [TableData,setTableData]:[Array<any>,Function]=useState([]);
     const userId:string=useSelector((state:{userId:{userId:string}})=>state?.userId?.userId);
-    function createData( PromoDate: string, Name: string ,Validity:string) {
-        return {PromoDate, Name, Validity};
+    const [showVerificationComponent,setshowVerificationComponent]=useState(false);
+    const [promotionId,setpromotionId]=useState("")
+    function createData( PromoDate: string, Name: string ,Validity:string,promotionId:string) {
+        return {PromoDate, Name, Validity,promotionId};
     }
     useEffect(()=>{
         let rows:Array<{Name:string}>=[]
-        if(PromotionInfo.length>0)
+        if(PromotionsInfo.length>0)
         {
-            PromotionInfo.map((promotiondata)=>{
-                rows.push(createData(promotiondata?.eventTimeStamp,PromoterData?.name , promotiondata?.validTo))
+            PromotionsInfo.map((promotiondata:any)=>{
+                console.log(promotiondata.id);
+                rows.push(createData(promotiondata?.eventTimeStamp,PromoterData?.name , promotiondata?.validTo,promotiondata.id))
             })
         }
         setTableData(rows);
-    },[PromotionInfo])
+    },[PromotionsInfo])
     useEffect(()=>{
         if(userId.length>0)
         {
             promoterInfo(userId,setPromoterData);
-            promotionData(userId,setPromotionInfo)
+            promotionData(userId,setPromotionsInfo)
         }
     },[userId])
+    const selectPromotion=(promotionId:string)=>{
+        setshowVerificationComponent(!showVerificationComponent)
+        setpromotionId(promotionId)
+        
+    }
+    
     return (
         <>
             <div className={styles.mypromos}>
+                {showVerificationComponent?<CouponVerification promotionId={promotionId} setshowVerificationComponent={setshowVerificationComponent} showVerificationComponent={showVerificationComponent} />:<></>}
                 <div className={styles.mypromos_head}>
                     <h1 className={styles.myPromos_head_heading}>My Promotions</h1>
                     <ol className={styles.myPromos_head_right}>
@@ -76,9 +87,9 @@ export default function Mypromos() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {TableData.map((row) => (
+                                    {TableData.map((row,count) => (
                                         <TableRow
-                                            key={row.Name}
+                                            key={count}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">
@@ -87,7 +98,7 @@ export default function Mypromos() {
                                             <TableCell align="right">{row.PromoDate}</TableCell>
                                             <TableCell align="right">{row.Validity}</TableCell>
                                             <TableCell align="right" sx={{paddingRight:'45px'}}><button className={styles.validate_info_graph}><TrendingUpIcon/></button></TableCell>
-                                            <TableCell align="right"><button className={styles.validate_info}>Click Here</button></TableCell>
+                                            <TableCell align="right"><button onClick={()=>selectPromotion(row.promotionId)}  className={styles.validate_info}>Click Here</button></TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>

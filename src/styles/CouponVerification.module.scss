@@ -1,0 +1,102 @@
+.couponcode_verification {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 2px;
+    z-index: 450;
+    background-color: gainsboro;
+    background: transparentize($color: rgb(54, 53, 53), $amount: 0.1);
+
+    .couponcode_verifications_body {
+        width: fit-content;
+        height: fit-content;
+        min-width:100px;
+        min-height:100px;
+        position: relative;
+
+        .couponcodeverify {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border-radius: 12px;
+            border: 1px solid gray;
+            box-shadow: 12px 12px 12px gray;
+            padding: 4rem 6rem;
+            background-color: gainsboro;
+
+            .validation_home {
+                font-weight: 600;
+            }
+
+            .couponcodeverify_form {
+                display: flex;
+                flex-direction: column;
+                font-size: small;
+                gap: 0.5rem;
+
+                .couponcodeverify_form_label {
+                    font-size: x-small;
+                    font-weight: 600;
+                }
+
+                .couponcodeverify_form_input {
+                    padding: 2px 8px;
+                    border-radius: 4px;
+                    border: none;
+                    outline: 1px solid gray;
+                    font-size: x-small;
+                    font-weight: 300;
+                }
+                .otp_verification {
+                    display: flex;
+                    width: fit-content;
+                    align-items: center;
+                    justify-content: center;
+                    margin: auto;
+                    padding: 6px 18px;
+                    font-weight: 600;
+                    color: white;
+                    background-color: black;
+                    border: none;
+                    outline: none;
+                    font-size: x-small;
+                    border-radius: 6px;
+                    cursor: pointer;
+                }
+            }
+        }
+        .closeBtn{
+            position: absolute;
+            right:10px;
+            top:8px;   
+            width: fit-content;
+            height: fit-content;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    }
+    .otp_verified{
+        padding: 4rem 6rem;
+        background-color: gainsboro;
+        border-radius: 12px;
+        border: 1px solid gray;
+        box-shadow: 12px 12px 12px gray;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:1rem;
+        .otp_verified_image{
+            width:100px;
+            height:100px;
+        }
+        .Code_Verified_text{
+            font-weight: 600;
+        }
+    }
+}
