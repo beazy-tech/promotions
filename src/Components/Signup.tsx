@@ -1,7 +1,7 @@
 import React, { useReducer,useEffect, useState } from 'react'
 import styles from '../styles/signup.module.scss'
 import { TextField, InputLabel, Select, MenuItem, FormControl } from '@mui/material'
-import logoImg from '../utils/Screenshot from 2023-04-18 15-30-38.png'
+import logoImg from '../utils/Screenshot_from_2023-04-18_15-30-38-removebg-preview.png'
 import Image from 'next/image';
 import SigninPopUp from '@/Components/SigninPopUp';
 import createPromoterAccount from '../handlers/createPromoterAccount.js';
