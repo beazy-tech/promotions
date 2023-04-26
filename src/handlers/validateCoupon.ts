@@ -1,5 +1,5 @@
 import { doc, runTransaction,collection } from "firebase/firestore";
-import { db } from '../firebaseConfig/config.js'
+import { db } from '../firebaseConfig/config'
 const validateCoupon = async (uid:string,promotionId:string,couponCode:string,setIsRedeemed:Function) => {
     const readDoc =  doc(db, "promoter", uid , "promotion" , promotionId);
     try {

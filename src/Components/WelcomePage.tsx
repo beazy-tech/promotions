@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import promoterInfo from '@/handlers/promoterInfo'
 export default function WelcomePage() {
   const [promoterData,setPromoterData]=useState({name:""});
-  const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId)
+  const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
   useEffect(()=>{
     if(userId.length>0)
     {

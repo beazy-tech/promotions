@@ -10,50 +10,97 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import promoterInfo from '@/handlers/promoterInfo';
 import promotionData from '@/handlers/promotionData';
 import CouponVerification from './CouponVerification';
+import { formatDistanceToNow, isPast} from 'date-fns';
+import { format } from 'date-fns/esm';
 interface data{
     datas:any,
     loading:boolean,
     error:object
 }
+interface promoterInfo{
+    category:string,
+    coupons: Array<any>,
+    eventTimeStamp:string, 
+    eventTimeStampId:number,
+    id:string,
+    message:string,
+    retailers:Array<any>,
+    totalRedeemedCoupon:number,
+    type:string,
+    validFrom:string,
+    validTo:string,
+    value:string,
+}
+
 export default function Mypromos() {
     const [IsActiivePromoActive, setIsActiivePromoActive] = useState(true);
-    const [PromoterData,setPromoterData]:[any,Function]=useState({})
-    const [PromotionsInfo,setPromotionsInfo]:[Array<{eventTimeStamp:string,validTo:string}>,Function]=useState([])
+    const [PromotionsInfo,setPromotionsInfo]:[Array<any>,Function]=useState([])
     const [TableData,setTableData]:[Array<any>,Function]=useState([]);
-    const userId:string=useSelector((state:{userId:{userId:string}})=>state?.userId?.userId);
+    const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
     const [showVerificationComponent,setshowVerificationComponent]=useState(false);
     const [promotionId,setpromotionId]=useState("")
+    const [showTableData,setShowTableData]:[Array<any>,Function]=useState([])
     function createData( PromoDate: string, Name: string ,Validity:string,promotionId:string) {
         return {PromoDate, Name, Validity,promotionId};
     }
     useEffect(()=>{
+        
         let rows:Array<{Name:string}>=[]
-        if(PromotionsInfo.length>0)
+        if(PromotionsInfo?.length>0)
         {
-            PromotionsInfo.map((promotiondata:any)=>{
-                console.log(promotiondata.id);
-                rows.push(createData(promotiondata?.eventTimeStamp,PromoterData?.name , promotiondata?.validTo,promotiondata.id))
+            showTableData.map((promotiondata:promoterInfo,count:number)=>{                
+                let strArr:Array<string>=promotiondata?.category?.split("_");                
+                let name=strArr?.length===3?`${strArr[0]} ${promotiondata?.value?.split("*")[0]} ${strArr[1]} ${promotiondata?.value?.split("*")[1]}`:strArr.length===2?`${strArr[0]} ${promotiondata?.value}${strArr[1]}`:promotiondata?.category
+                rows.push(createData(promotiondata?.eventTimeStamp,name , promotiondata?.validTo,promotiondata.id))
             })
         }
         setTableData(rows);
-    },[PromotionsInfo])
+    },[showTableData])
     useEffect(()=>{
         if(userId.length>0)
         {
-            promoterInfo(userId,setPromoterData);
             promotionData(userId,setPromotionsInfo)
         }
     },[userId])
+    
     const selectPromotion=(promotionId:string)=>{
         setshowVerificationComponent(!showVerificationComponent)
         setpromotionId(promotionId)
-        
     }
     
+    useEffect(()=>{
+        let data:Array<any>=[];
+        if(IsActiivePromoActive)
+        {
+            PromotionsInfo.map((promoData:any,count:number)=>{
+                let ValidDate=promoData.validTo.split("/");
+                ValidDate=new Date(ValidDate[2]+"-"+ValidDate[1]+"-"+ValidDate[0]);
+                if(!isPast(ValidDate))
+                {
+                    data.push(promoData);
+                }
+            })
+            console.log(data)
+        }
+        else{
+            PromotionsInfo.map((promoData:any,count:number)=>{
+                let ValidDate=promoData.validTo.split("/");
+                ValidDate=new Date(ValidDate[2]+"-"+ValidDate[1]+"-"+ValidDate[0]);
+                if(isPast(ValidDate))
+                {
+                    data.push(promoData);
+                }
+            })
+            console.log(data);
+            
+        }
+        setShowTableData(data)
+    },[PromotionsInfo,IsActiivePromoActive])
     return (
         <>
             <div className={styles.mypromos}>
@@ -62,7 +109,7 @@ export default function Mypromos() {
                     <h1 className={styles.myPromos_head_heading}>My Promotions</h1>
                     <ol className={styles.myPromos_head_right}>
                         <li className={styles.myPromos_head_right_item}>
-                            <button className={styles.myPromos_head_right_btn}>Create new promotion</button>
+                            <Link href="/newpromo"><button className={styles.myPromos_head_right_btn}>Create new promotion</button></Link>
                         </li>
                         <li className={styles.myPromos_head_right_item}>
                             <Image className={styles.myPromos_head_img} src={Logo} alt="none" />

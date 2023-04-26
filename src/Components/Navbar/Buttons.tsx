@@ -9,7 +9,7 @@ export default function Buttons({btn_type}:IProps) {
     <>
     <div className={styles.button}>
       {
-        <Link href={btn_type==='Create account'?'/signup':'/login'}>
+        <Link href={'/signup'}>
           {btn_type}
         </Link>
       }

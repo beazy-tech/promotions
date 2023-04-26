@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_APIKEY,
@@ -8,8 +9,10 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
   appId: process.env.NEXT_PUBLIC_APPID,
-  measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID,
+  // storageBucket: process.env.NEXT_PUBLIC_FIRESTOREBUCKET
 };
 const app = initializeApp(firebaseConfig);
+// const storage=getStorage(app);
 const db=getFirestore(app)
 export {db,app};

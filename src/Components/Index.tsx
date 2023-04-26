@@ -5,7 +5,7 @@ import HomePage from '@/Components/Home'
 import WelcomePage from '@/Components/WelcomePage'
 import { useSelector } from 'react-redux'
 export default function Index() {
-  const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId);
+  const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
   return (
     <>
       <Head>

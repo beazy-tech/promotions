@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import OtpInput from 'react-otp-input';
 import { onLoginVerification,onOTPVerify } from '../handlers/handleAuth'
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch } from 'react-redux';
 interface initprops {
     setShowPopUp: Function,
     value:string,
@@ -16,6 +17,7 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [otp, setOtp] = useState('');
     const route = useRouter();
+    const dispatch=useDispatch();
     const handelCross = () => {
         setShowPopUp(false);
         route.push("/")
@@ -24,7 +26,7 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
         onLoginVerification(value, setIsOtpSent);
     }
     const onOtpVerify=()=>{
-        onOTPVerify(otp,setShowPopUp)
+        onOTPVerify(otp,setShowPopUp,dispatch)
     }
     return (
         <>

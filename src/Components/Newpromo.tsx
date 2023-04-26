@@ -8,9 +8,10 @@ import 'react-calendar/dist/Calendar.css';
 import { format } from 'date-fns';
 import createNewPromotion from '../handlers/createNewPromotion'
 import generateRandomId from '@/handlers/generateRandomId';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import img from '../utils/Screenshot_from_2023-04-18_15-30-38-removebg-preview.png'
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 const categories=[
   "Flat Rs_ Off","Flat_ % discount","Rs _ off on purchases above Rs_","days free trial","Custom message","Brand promotion"
 ]
@@ -50,7 +51,10 @@ const initalState:initalstate={
 }
 export default function Createpromo() {
   const [values, onChangeValue]= useState([new Date(),new Date()]);
-  const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId);
+  const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
+  const [isPromotionCreated,setIsPromotionCreated]=useState(false);
+  const dispatcher=useDispatch()
+  const route=useRouter();
   const reducer=(state:initalstate,action:any)=>{
     switch(action.type)
     {
@@ -100,8 +104,14 @@ export default function Createpromo() {
       retailers:[],
       coupons:[]
     };
-    createNewPromotion(data,data.id,userId)
-  }  
+    createNewPromotion(data,data.id,userId,dispatcher,setIsPromotionCreated)
+  }
+  useEffect(()=>{
+    if(isPromotionCreated)
+    {
+      route.push("/mypromos")
+    }
+  },[isPromotionCreated])
   return (
     <>
     <div className={styles.newPromotion}>

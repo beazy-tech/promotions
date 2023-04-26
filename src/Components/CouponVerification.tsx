@@ -13,7 +13,7 @@ interface props {
 export default function CouponVerification({ showVerificationComponent, setshowVerificationComponent, promotionId }: props) {
     const [couponCode, setCouponCode] = useState("");
     const [isRedeemed, setIsRedeemed] = useState(false);
-    const userId = useSelector((state: { userId: { userId: string } }) => state.userId.userId)
+    const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
     const validateCouponCode = () => {
         if (userId.length > 0) {
             validateCoupon(userId, promotionId, couponCode, setIsRedeemed);

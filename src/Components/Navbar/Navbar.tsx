@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Image from 'next/image'
 import logo from '../../utils/Beazy-Logo-image.svg'
 import styles from '@/styles/Navbar.module.scss'
@@ -8,29 +8,38 @@ import {useDispatch, useSelector} from 'react-redux'
 import LoginIcon from '@mui/icons-material/Login';
 import { signOutUser } from '@/handlers/handleAuth'
 import LogoutIcon from '@mui/icons-material/Logout';
+import { checkUserAuth } from '@/handlers/handleAuth'
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CreateIcon from '@mui/icons-material/Create';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 interface btnType{
-    type:String
+    type:String,
 }
 const btn_type:btnType[]=[
     {
-        type:"Create account"
-    },
-    {
-        type:"Login"
+        type:"Sign Up / Login"
     }
 ]
-export default function Navbar() {
+interface propstype{
+    setShowStatusPopup:Function
+}
+export default function Navbar(props:propstype) {
     const [isNavClicked, setisNavClicked] = useState<Boolean>(false);
-    const userId=useSelector((state:{userId:{userId:string}})=>state.userId.userId);
+    const showStatusPopUp=useSelector((state:{rootReducer:{storeData:{statusPopUp:{isShow:boolean,type:string}}}})=>state.rootReducer.storeData.statusPopUp)
+    const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
     const dispatch=useDispatch();
     const logout=()=>{
         setisNavClicked(!isNavClicked);
         signOutUser(dispatch);
     }
+    useEffect(()=>{
+        checkUserAuth(dispatch);
+    },[])
+    useEffect(()=>{
+        props.setShowStatusPopup(showStatusPopUp)
+    },[showStatusPopUp.isShow])
+    
   return (
     <>
     <ul className={styles.Navbar}>
@@ -44,8 +53,8 @@ export default function Navbar() {
                     <>
                 <ul className={styles.Navbar_right_list}>
                     <Link href="/"><li className={styles.Navbar_right_list_item}>Home</li></Link>
-                    <Link href="/newpromo"><li className={styles.Navbar_right_list_item}>Create Coupon</li></Link>
-                    <Link href="/mypromos"><li className={styles.Navbar_right_list_item}>My Promos</li></Link>
+                    <Link href="/newpromo"><li className={styles.Navbar_right_list_item}>Create Promotion</li></Link>
+                    <Link href="/mypromos"><li className={styles.Navbar_right_list_item}>My Promotions</li></Link>
                     <Link href="/"><li onClick={logout} className={styles.Navbar_right_list_item}>Log Out</li></Link>
                 </ul>
                 </>:
@@ -71,13 +80,12 @@ export default function Navbar() {
         <Link href="/"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><HomeIcon sx={{color:'white'}}/> Home</li></Link>
         {userId.length>0?
         <>
-            <Link href="/newpromo"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><CreateIcon sx={{color:'white'}}/> Create Coupons</li></Link>
-            <Link href="/mypromos"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><FormatListBulletedIcon sx={{color:'white'}}/>Coupons List</li></Link>
+            <Link href="/newpromo"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><CreateIcon sx={{color:'white'}}/> Create Promotion</li></Link>
+            <Link href="/mypromos"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><FormatListBulletedIcon sx={{color:'white'}}/>Promotion List</li></Link>
             <Link href="/"></Link><li className={styles.navbar_right_item_list_logout_btn} onClick={logout}><LogoutIcon sx={{color:'white'}}/> <p>Logout</p></li>
         </>:
         <>
-            <Link href="/signup"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}> <AccountCircleIcon sx={{color:'white'}}/> SignIn</li></Link>
-            <Link href="/login"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><LoginIcon sx={{color:'white'}}/> login</li></Link>
+            <Link href="/signup"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}> <AccountCircleIcon sx={{color:'white'}}/> SignIn/Login</li></Link>
         </>}
     </ul>
     </>
