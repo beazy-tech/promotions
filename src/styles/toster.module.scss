@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap');
+.toster_Main{
+    z-index: 999;
+    position: absolute;
+    background-color: green;
+    width:200px;
+    border-radius: 12px;
+    height:60px;
+    display: flex;
+    align-items: center;
+    padding:0 2rem;
+    gap:0.5rem;
+    bottom:12px;
+    right:10%;
+    @media screen and (min-width:950px)
+    {
+        gap:1rem;
+        right:2%;
+        bottom:2rem;
+        height:80px;    
+        width:400px;
+    }
+    .tosterIcon{
+        font-size: 2rem;
+        color:white;
+        @media screen and (min-width:950px)
+        {
+            font-size: 3rem;
+        }
+    }
+    .toster_body{
+        .toster_heading{
+            color:white;
+            font-family: 'Inter', sans-serif;
+            @media screen and (min-width:"950px")
+            {
+                font-size: x-large;
+
+            }
+        }
+        .toster_description{
+            font-family: 'Roboto', sans-serif;
+            color:white;
+            font-size: x-small;
+            @media screen and (min-width:950px)
+            {
+                font-size: large;
+            }
+        }
+    }
+}

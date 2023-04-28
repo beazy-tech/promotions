@@ -11,7 +11,7 @@ export default function Home() {
         <h1 className={styles.home_body_tag}>Promotions made  easy with Beazy</h1>
         <Link href='/signup' >
           <button className={styles.create_account_btn}>
-            Create Account
+            Sign Up / Log In
           </button>
         </Link>
       </div>

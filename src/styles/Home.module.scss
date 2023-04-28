@@ -6,7 +6,7 @@
   align-items: center;
   padding: 6rem 0rem;
   flex-direction: column-reverse;
-  gap: 4rem;
+  gap: 2rem;
   justify-content: space-evenly;
 
   @media screen and (min-width:950px) {
@@ -21,7 +21,7 @@
     width: 100vw;
     padding: 0 1rem;
     flex-direction: column;
-    gap: 8rem;
+    gap: 4rem;
 
     @media screen and (min-width:950px) {
       width: 40vw;
@@ -31,7 +31,7 @@
     .home_body_tag {
       font-weight: 100;
       color: white;
-      font-size: 4rem;
+      font-size: 3rem;
       text-align: center;
 
       @media screen and (min-width:950px) {

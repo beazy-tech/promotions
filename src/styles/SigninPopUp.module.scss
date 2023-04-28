@@ -46,7 +46,14 @@
                 }
                 .phone_number_input_box{
                     width:100%;
-                }
+                    .PhoneInput{
+                        .PhoneInputCountry{
+                            .PhoneInputInput{
+                                height:60px !important;
+                            }
+                        }
+                    }
+                  }
             }
             .sign_up_btn{
                 width: fit-content;
@@ -56,6 +63,7 @@
                 background-color: blueviolet;
                 color:white;
                 font-weight: 600;
+                font-size: large;
                 cursor: pointer;
             }
         }
@@ -88,11 +96,10 @@
             flex-direction: column;
             align-items: center;
             gap:1rem;
-            height:100px;
             .otp_head{
                 font-weight: 600;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                font-size: small;
+                // font-size: ;
                 display:flex;
                 flex-direction: column;
                 align-items: center;
@@ -105,7 +112,7 @@
                     font-size: larger;
                     @media screen and (min-width:950px)
                     {
-                        font-size: x-large;
+                        font-size: xx-large;
                     }
                 }
                 .otp_sent_number{
@@ -115,11 +122,11 @@
                     gap:4px;
                     .contact_number{
                         color:blueviolet;
-                        font-size: x-small;
+                        font-size: small;
                         padding: 0;
                         @media screen and (min-width:950px)
                         {
-                            font-size: large;
+                            font-size: x-large;
                         }
                     }
                     .phone_Number_change_btn{

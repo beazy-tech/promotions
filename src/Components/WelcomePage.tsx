@@ -8,6 +8,7 @@ import promoterInfo from '@/handlers/promoterInfo'
 export default function WelcomePage() {
   const [promoterData,setPromoterData]=useState({name:""});
   const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
+  const businessDetails=useSelector((state:{rootReducer:{storeData:{businessDetails:any}}})=>state.rootReducer.storeData.businessDetails)
   useEffect(()=>{
     if(userId.length>0)
     {
@@ -17,7 +18,7 @@ export default function WelcomePage() {
   return (
     <>
     <div className={styles.welcomePage}>
-        <h3 className={styles.business_Name}>Welcome <b className={styles.businessName_in_Bold}>{promoterData.name}</b></h3>
+        <h3 className={styles.business_Name}>Welcome <b className={styles.businessName_in_Bold}>{businessDetails.name}</b></h3>
         <div className={styles.welcomePage_body}>
             <div className={styles.product_promotion}>
                 <p className={styles.text}>Ready to reach new customers with Beazy Promotions?</p>

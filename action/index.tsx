@@ -1,3 +1,14 @@
+// interface businessDetails{
+//     address:string,
+//     city:string,
+//     id:string,
+//     logo:string,
+//     mobile:string,
+//     name:string,
+//     state:string,
+//     type:string,
+//     zipcode:string
+// }
 const userId=(data:string)=>{
     return {
         type:"USERID",
@@ -6,13 +17,23 @@ const userId=(data:string)=>{
         }
     }
 }
-const showPopUp=(data:[boolean,string])=>{
+const businessDetails=(data:any)=>{
     return {
-        type:"SHOWPOPUP",
+        type:"BUSINESSDETAILS",
         payload:{
-            isOpen:data[0],
-            type:data[1]
+            businessDetails:data
         }
     }
 }
-export {userId,showPopUp}
+const toster=(data:{msg:string,type:string,showPopUp:boolean})=>
+{
+    return {
+        type:"TOSTERDATA",
+        payload:{
+            msg:data.msg,
+            type:data.type,
+            showPopUp:data.showPopUp
+        }
+    }
+}
+export {userId,businessDetails,toster}

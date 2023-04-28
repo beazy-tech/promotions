@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import styles from '@/styles/SigninPopUp.module.scss'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input';
 import CloseIcon from '@mui/icons-material/Close';
 import { useRouter } from 'next/router';
+import { MuiTelInput } from 'mui-tel-input' 
 import OtpInput from 'react-otp-input';
 import { onLoginVerification,onOTPVerify } from '../handlers/handleAuth'
 import EditIcon from '@mui/icons-material/Edit';
@@ -13,11 +12,22 @@ interface initprops {
     value:string,
     setValue:any
 }
+const inputStyle = {
+    height: '35px',
+    width: '35px'
+};
 export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) {
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [otp, setOtp] = useState('');
     const route = useRouter();
     const dispatch=useDispatch();
+    const handleChange=(e:number)=>{
+        console.log(e.toString().length);
+        if(e.toString().length<=15)
+        {
+            setValue(e)
+        }
+    }
     const handelCross = () => {
         setShowPopUp(false);
         route.push("/")
@@ -28,6 +38,8 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
     const onOtpVerify=()=>{
         onOTPVerify(otp,setShowPopUp,dispatch)
     }
+    console.log(value);
+    
     return (
         <>
             <div className={styles.signInPopup}>
@@ -36,7 +48,7 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
                         <div className={styles.phone_input_block}> 
                             <label className={styles.inputLabel} htmlFor="phone_number">Enter your Phone number</label>
                             <div className={styles.phone_number_input_box}>
-                                <PhoneInput id="phone_number" placeholder="Enter here..." value={value} onChange={setValue} country="IN" defaultCountry='IN' />
+                                <MuiTelInput value={value} onChange={handleChange} defaultCountry='IN'/>
                             </div>
                         </div>
                         <button id="sign_up_button" onClick={signUp} className={styles.sign_up_btn}>Sign up</button>
@@ -54,9 +66,10 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
                                 value={otp}
                                 onChange={setOtp}
                                 numInputs={6}
-                                inputType='text'
+                                inputType='number'
                                 containerStyle={{justifyContent:"space-evenly",height:"fit-content"}}
                                 renderSeparator={<span>-</span>}
+                                inputStyle={inputStyle}
                                 renderInput={(props) => <input {...props}
                                 />}/>
                             <button onClick={onOtpVerify} className={styles.verify_otp}>Verify Otp</button>

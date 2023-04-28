@@ -1,23 +1,49 @@
 interface initalInfo{
     userId:string,
-    statusPopUp:{
-        isShow:boolean,
+    businessDetails:{
+        address:string,
+        city:string,
+        id:string,
+        logo:string,
+        mobile:string,
+        name:string,
+        state:string,
+        type:string,
+        zipcode:string
+    },
+    toster:{
+        msg:string,
         type:string
+        showPopUp:boolean
     }
 }
 const initailState:initalInfo={
     userId:"",
-    statusPopUp:{
-        isShow:false,
-        type:""
+    businessDetails:{
+        address:"",
+        city:"",
+        id:"",
+        logo:"",
+        mobile:"",
+        name:"",
+        state:"",
+        type:"",
+        zipcode:""
+    },
+    toster:{
+        msg:"",
+        type:"",
+        showPopUp:false,
     }
 }
 const storeData=(state:any=initailState,action:any)=>{
     switch (action.type){
         case "USERID":
             return {...state,userId:action.payload.userId};
-        case "SHOWPOPUP":
-            return {...state,statusPopUp:{isShow:action.payload.isOpen,type:action.payload.type}};
+        case "BUSINESSDETAILS":
+            return {...state,businessDetails:action.payload.businessDetails}
+        case "TOSTERDATA":
+            return {...state,toster:action.payload.toster}
         default:
             return state;
     }

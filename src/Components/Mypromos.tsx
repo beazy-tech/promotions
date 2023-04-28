@@ -1,6 +1,5 @@
 import { useState,useEffect } from 'react';
 import styles from '@/styles/mypromos.module.scss';
-import Logo from '@/utils/Beazy-Logo-image.svg'
 import Image from 'next/image';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,12 +10,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import promoterInfo from '@/handlers/promoterInfo';
 import promotionData from '@/handlers/promotionData';
 import CouponVerification from './CouponVerification';
-import { formatDistanceToNow, isPast} from 'date-fns';
-import { format } from 'date-fns/esm';
+import AddIcon from '@mui/icons-material/Add';
+import { isPast} from 'date-fns';
 interface data{
     datas:any,
     loading:boolean,
@@ -26,7 +25,7 @@ interface promoterInfo{
     category:string,
     coupons: Array<any>,
     eventTimeStamp:string, 
-    eventTimeStampId:number,
+    eventTimeStampId:string,
     id:string,
     message:string,
     retailers:Array<any>,
@@ -45,8 +44,10 @@ export default function Mypromos() {
     const [showVerificationComponent,setshowVerificationComponent]=useState(false);
     const [promotionId,setpromotionId]=useState("")
     const [showTableData,setShowTableData]:[Array<any>,Function]=useState([])
-    function createData( PromoDate: string, Name: string ,Validity:string,promotionId:string) {
-        return {PromoDate, Name, Validity,promotionId};
+    const businessDetails=useSelector((state:{rootReducer:{storeData:{businessDetails:any}}})=>state.rootReducer.storeData.businessDetails)
+    const dispatch=useDispatch()    
+    function createData( PromoDate: string, Name: string ,validFrom:string,validTo:string,promotionId:string,message:string) {
+        return {PromoDate, Name, validFrom,validTo,promotionId,message};
     }
     useEffect(()=>{
         
@@ -55,8 +56,8 @@ export default function Mypromos() {
         {
             showTableData.map((promotiondata:promoterInfo,count:number)=>{                
                 let strArr:Array<string>=promotiondata?.category?.split("_");                
-                let name=strArr?.length===3?`${strArr[0]} ${promotiondata?.value?.split("*")[0]} ${strArr[1]} ${promotiondata?.value?.split("*")[1]}`:strArr.length===2?`${strArr[0]} ${promotiondata?.value}${strArr[1]}`:promotiondata?.category
-                rows.push(createData(promotiondata?.eventTimeStamp,name , promotiondata?.validTo,promotiondata.id))
+                let name=strArr?.length===3?`${strArr[0]} ${promotiondata?.value?.split("*")[0]} ${strArr[1]} ${promotiondata?.value?.split("*")[1]}`:strArr.length===2?promotiondata.category!=="_days free trial"?`${strArr[0]} ${promotiondata?.value}${strArr[1]}`:`${promotiondata?.value} ${strArr[1]}`:promotiondata?.category
+                rows.push(createData(promotiondata?.eventTimeStamp,name ,promotiondata.validFrom,promotiondata?.validTo,promotiondata.id,promotiondata.message))
             })
         }
         setTableData(rows);
@@ -109,10 +110,10 @@ export default function Mypromos() {
                     <h1 className={styles.myPromos_head_heading}>My Promotions</h1>
                     <ol className={styles.myPromos_head_right}>
                         <li className={styles.myPromos_head_right_item}>
-                            <Link href="/newpromo"><button className={styles.myPromos_head_right_btn}>Create new promotion</button></Link>
+                            <Link href="/newpromo"><button className={styles.myPromos_head_right_btn}><AddIcon/>Create new promotion</button></Link>
                         </li>
                         <li className={styles.myPromos_head_right_item}>
-                            <Image className={styles.myPromos_head_img} src={Logo} alt="none" />
+                            <Image className={styles.myPromos_head_img} src={businessDetails.logo} alt="none" width={10} height={10} />
                         </li>
                     </ol>
                 </div>
@@ -127,10 +128,10 @@ export default function Mypromos() {
                                 <TableHead>
                                     <TableRow sx={{fontWeight:"800"}}>
                                         <TableCell sx={{fontWeight:"900"}}>Name</TableCell>
-                                        <TableCell sx={{fontWeight:"900"}} align="right">Promo date</TableCell>
-                                        <TableCell sx={{fontWeight:"900"}} align="right">Validity</TableCell>
-                                        <TableCell sx={{fontWeight:"900"}} align="right">Performance</TableCell>
-                                        <TableCell sx={{fontWeight:"900"}} align="right">Validate</TableCell>
+                                        <TableCell sx={{fontWeight:"900"}} align="center">Promo date</TableCell>
+                                        <TableCell sx={{fontWeight:"900"}} align="center">Promo Validity</TableCell>
+                                        <TableCell sx={{fontWeight:"900"}} align="center">Performance</TableCell>
+                                        <TableCell sx={{fontWeight:"900"}} align="center">Validate</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -140,12 +141,13 @@ export default function Mypromos() {
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">
-                                                {row.Name}
+                                                {row.message.length>0?row.message:row.Name}
+                                                {/* {row.Name} */}
                                             </TableCell>
-                                            <TableCell align="right">{row.PromoDate}</TableCell>
-                                            <TableCell align="right">{row.Validity}</TableCell>
-                                            <TableCell align="right" sx={{paddingRight:'45px'}}><button className={styles.validate_info_graph}><TrendingUpIcon/></button></TableCell>
-                                            <TableCell align="right"><button onClick={()=>selectPromotion(row.promotionId)}  className={styles.validate_info}>Click Here</button></TableCell>
+                                            <TableCell align="center">{row.PromoDate}</TableCell>
+                                            <TableCell align="center">{row.validTo} - {row.validFrom}</TableCell>
+                                            <TableCell align="center" sx={{paddingRight:'45px'}}><button className={styles.validate_info_graph}><TrendingUpIcon/></button></TableCell>
+                                            <TableCell align="center"><button onClick={()=>selectPromotion(row.promotionId)}  className={styles.validate_info}>Click Here</button></TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>

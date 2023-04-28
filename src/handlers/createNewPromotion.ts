@@ -1,6 +1,6 @@
 import { doc, setDoc, getDoc } from '@firebase/firestore';
 import {db} from '../firebaseConfig/config';
-import { showPopUp } from '../../action';
+import { toster } from '../../action';
 interface datatype{
   category:string,
       type:string,
@@ -11,7 +11,7 @@ interface datatype{
       value:string,
       eventTimeStamp:string,
       totalRedeemedCoupon:number,
-      eventTimeStampId:number,
+      eventTimeStampId:string,
       retailers:Array<any>,
       coupons:Array<any>
 }
@@ -19,7 +19,7 @@ const createNewPromotion = async (testData:datatype,id:string,uid:string,dispatc
   const writeDoc = doc(db, `promoter/${uid}/promotion`,id);
   try {
       let data = await setDoc(writeDoc, { ...testData })
-      dispatcher(showPopUp([true,"Success"]))
+      // dispatcher(toster(data:{msg:"Promotion Created Successfully", type:"Success", showPopUp:true}))
       setIsPromotionCreated(true);
   }
   catch (err) {

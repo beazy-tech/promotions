@@ -1,0 +1,18 @@
+.input_message{
+    display:flex;
+    flex-direction: column;
+    align-items: start;
+    gap:12px;
+    .input_label{
+        display:flex;
+        font-size: larger;
+        font-weight: 700;
+    }
+    .textarea_input{
+        border-radius: 12px;
+        background-color: transparent;
+        padding:8px;
+        font-size: small;
+        outline: none;
+    }
+}

@@ -25,9 +25,9 @@
         @media screen and (min-width:950px)
         {
             font-size: 4rem;
-            flex-direction: row;
-            align-items: start;
             gap:12px;
+            text-align: center;
+            max-width:40%;
         }
     }
     .welcomePage_body{

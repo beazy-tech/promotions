@@ -1,14 +1,13 @@
-import React, { useReducer,useEffect, useState } from 'react'
-import styles from '../styles/signup.module.scss'
-import { TextField, InputLabel, Select, MenuItem, FormControl } from '@mui/material'
-import logoImg from '../utils/Screenshot_from_2023-04-18_15-30-38-removebg-preview.png'
-import Image from 'next/image';
-import SigninPopUp from '@/Components/SigninPopUp';
+import {useEffect,useReducer,useState} from 'react';
+import styles from "@/styles/businessDetailsForm.module.scss";
 import { useSelector,useDispatch } from 'react-redux';
 import createPromoterAccount from '../handlers/createPromoterAccount';
 import { useRouter } from 'next/router';
 import promoterInfo from '@/handlers/promoterInfo';
+import { TextField, InputLabel, Select, MenuItem, FormControl } from '@mui/material'
+import Image from 'next/image';
 import uploadFile from '@/handlers/uploadFiles';
+import { businessDetails } from '../../action';
 interface initalData{
   address:string,
   city:string,
@@ -30,9 +29,7 @@ const initalData:initalData={
   zipcode:""
 }
 
-export default function CreateAccount() {
-  const [showPopUp,setShowPopUp]=useState(true);
-  const [value, setValue] = useState("");
+export default function BusinessDetailsForm() {
   const [image, setImage] = useState<File>();
   const [previewimage,setPreviewImage]=useState<string>("")
   const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
@@ -85,18 +82,16 @@ export default function CreateAccount() {
       e.preventDefault();
       if(state.type==="Other" && customType.length>0)
       {
-        dispatch({type:"TYPE",payload:customType});
+        dispatch({type:"TYPE",payload:customType})
       }
       createPromoter();
     }
     useEffect(()=>{
       if(userId.length>0)
       {
-        promoterInfo(userId,dispatcher);
+        promoterInfo(userId,dispatcher)
       }
     },[userId])
-    console.log(state);
-    
     useEffect(()=>{
       if(businessDetails?.address?.length>0 && businessDetails?.type?.length>0)
       {
@@ -111,17 +106,10 @@ export default function CreateAccount() {
         route.push("/mypromos")
       }
     },[businessDetails])
-  
-    useEffect(()=>{
-      if(!showPopUp){
-        dispatch({type:"MOBILE",payload:value.slice(3)})
-      }
-    },[showPopUp])
-    return (
+    
+  return (
     <>
-      <div className={styles.createAccount}>
-        {showPopUp?<SigninPopUp value={value} setValue={setValue} setShowPopUp={setShowPopUp}/>:<></>}
-        <div className={styles.createAccount_left}>
+    <div className={styles.createAccount_left}>
           <h2 className={styles.createAccount_heading}>Let's Get Started ...</h2>
           <p className={styles.createAccount_desc}>Please provide your business details. The information will be used in the promotion banner</p>
           <form className={styles.createAccount_form} onSubmit={handleSubmit}>
@@ -163,9 +151,6 @@ export default function CreateAccount() {
             <button className={styles.submit_btn}>Continue</button>
           </form>
         </div>
-        {/* <BusinessDetailsForm/> */}
-        <Image src={logoImg} alt="none" className={styles.signUp_img} height={300} />
-      </div>
     </>
   )
 }

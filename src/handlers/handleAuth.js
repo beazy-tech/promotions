@@ -1,6 +1,6 @@
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
 import {app} from "../firebaseConfig/config"
-import { showPopUp, userId } from "../../action";
+import {businessDetails, showPopUp, userId } from "../../action";
 const auth = getAuth(app);
 auth.useDeviceLanguage();
 const onCaptchVerify = () => {
@@ -76,6 +76,17 @@ const checkUserAuth = (dispatch) => {
 const signOutUser = (dispatch) => {
     signOut(auth).then(() => {
         dispatch(userId(""))
+        dispatch(businessDetails({
+            address:"",
+            city:"",
+            id:"",
+            logo:"",
+            mobile:"",
+            name:"",
+            state:"",
+            type:"",
+            zipcode:""
+          }))
     }).catch((error) => {
     });
 

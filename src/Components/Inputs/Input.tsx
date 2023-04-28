@@ -19,6 +19,10 @@ export default function Input({Lable,Type,Placeholder,required,dispatch,value}:i
       dispatch({type:"DISCOUNT_OFF",payload:e.target.value})
       dispatch({type:"VALUE",payload:""})
     }
+    else if(Lable==="Number of Days")
+    {
+      dispatch({type:"VALUE",payload:e.target.value})
+    }
     else{
       dispatch({type:"ABOVE_RS",payload:e.target.value})
     }

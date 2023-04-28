@@ -5,7 +5,6 @@ import styles from '@/styles/Navbar.module.scss'
 import Buttons from './Buttons'
 import Link from 'next/link'
 import {useDispatch, useSelector} from 'react-redux'
-import LoginIcon from '@mui/icons-material/Login';
 import { signOutUser } from '@/handlers/handleAuth'
 import LogoutIcon from '@mui/icons-material/Logout';
 import { checkUserAuth } from '@/handlers/handleAuth'
@@ -13,20 +12,22 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CreateIcon from '@mui/icons-material/Create';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import promoterInfo from '@/handlers/promoterInfo'
 interface btnType{
     type:String,
 }
 const btn_type:btnType[]=[
     {
-        type:"Sign Up / Login"
+        type:"Sign Up / Log In"
     }
 ]
 interface propstype{
-    setShowStatusPopup:Function
+    setShowToster:Function,
+    showToaster:boolean
 }
 export default function Navbar(props:propstype) {
     const [isNavClicked, setisNavClicked] = useState<Boolean>(false);
-    const showStatusPopUp=useSelector((state:{rootReducer:{storeData:{statusPopUp:{isShow:boolean,type:string}}}})=>state.rootReducer.storeData.statusPopUp)
+    const showToster=useSelector((state:{rootReducer:{storeData:{toster:any}}})=>state.rootReducer.storeData.toster);
     const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
     const dispatch=useDispatch();
     const logout=()=>{
@@ -37,8 +38,16 @@ export default function Navbar(props:propstype) {
         checkUserAuth(dispatch);
     },[])
     useEffect(()=>{
-        props.setShowStatusPopup(showStatusPopUp)
-    },[showStatusPopUp.isShow])
+        if(userId.length>0)
+        {
+            promoterInfo(userId,dispatch);
+        }
+    },[userId])
+    // useEffect(()=>{
+    //     props.setShowToster(showToster?.showPopUp)
+    // },[showToster])
+    // console.log("show Toster --->",showToster.showPopUp);
+    // console.log("show props Toaster-->",props.showToaster)
     
   return (
     <>
@@ -46,6 +55,7 @@ export default function Navbar(props:propstype) {
         <li className={styles.Navbar_left}>
             <Link href={"/"}><Image src={logo} alt="none" className={styles.logoImg}/></Link>
             <h1 className={styles.branding}>Welcome to Beazy Promotions !!</h1>
+            <h1 className={styles.mobile_branding}>Welcome to Beazy Promo ... !!</h1>
         </li>
         <li className={styles.Navbar_right}>
             {
@@ -82,10 +92,10 @@ export default function Navbar(props:propstype) {
         <>
             <Link href="/newpromo"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><CreateIcon sx={{color:'white'}}/> Create Promotion</li></Link>
             <Link href="/mypromos"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}><FormatListBulletedIcon sx={{color:'white'}}/>Promotion List</li></Link>
-            <Link href="/"></Link><li className={styles.navbar_right_item_list_logout_btn} onClick={logout}><LogoutIcon sx={{color:'white'}}/> <p>Logout</p></li>
+            <Link href="/"><li className={styles.navbar_right_item_list_logout_btn} onClick={logout}><LogoutIcon sx={{color:'white'}}/> <p>Logout</p></li></Link>
         </>:
         <>
-            <Link href="/signup"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}> <AccountCircleIcon sx={{color:'white'}}/> SignIn/Login</li></Link>
+            <Link href="/signup"><li onClick={()=>setisNavClicked(!isNavClicked)} className={styles.navbar_right_item}> <AccountCircleIcon sx={{color:'white'}}/> SignUp / Login</li></Link>
         </>}
     </ul>
     </>

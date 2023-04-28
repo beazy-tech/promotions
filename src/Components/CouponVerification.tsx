@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import styles from '@/styles/CouponVerification.module.scss'
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
@@ -18,11 +18,8 @@ export default function CouponVerification({ showVerificationComponent, setshowV
         if (userId.length > 0) {
             validateCoupon(userId, promotionId, couponCode, setIsRedeemed);
         }
-    }
-    setTimeout(()=>{
-        setIsRedeemed(false);
-        setshowVerificationComponent(false);
-    },2000)
+        }
+        // usx
     return (
         <>
             <div className={styles.couponcode_verification}>
