@@ -21,7 +21,7 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
     const [otp, setOtp] = useState('');
     const route = useRouter();
     const dispatch=useDispatch();
-    const handleChange=(e:number)=>{
+    const handleChange=(e:any)=>{
         console.log(e.toString().length);
         if(e.toString().length<=15)
         {

@@ -4,7 +4,6 @@ import Image from 'next/image'
 import successLogo from '../utils/35f323bc5b41dc4269001529e3ff1278.gif'
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useDispatch } from 'react-redux';
-import { showPopUp } from '../../action';
 export default function StatusPopup() {
   const [completed,setCompleted]=useState(100);
   const dispatch=useDispatch();
@@ -14,7 +13,6 @@ export default function StatusPopup() {
       count-=5;
       setCompleted(count-5)
       if(count == 0) {
-        dispatch(showPopUp([false,""]))
         clearInterval(interval);
       }
   }, 100);

@@ -1,6 +1,6 @@
 import { doc, setDoc, getDoc,updateDoc } from '@firebase/firestore';
 import {db} from '../firebaseConfig/config';
-import { businessDetails, showPopUp } from '../../action';
+import { businessDetails } from '../../action';
 // import { getStorage, ref } from "firebase/storage" ;
 const createPromoterAccount = async (testData:any = {},id:string,dispatch:Function,url:string) => {
   // const readDoc = doc(db, `promoter/${id}`);
@@ -14,7 +14,6 @@ const createPromoterAccount = async (testData:any = {},id:string,dispatch:Functi
     // else 
     if (testData.mobile) {
       let data = await setDoc(writeDoc, { ...testData, id ,mobile:testData?.mobile?.split("+91")?.length===1?testData?.mobile?.split("+91")[0]:testData?.mobile?.split("+91")[1],logo:url })
-      dispatch(showPopUp([true,"Success"]))
       dispatch(businessDetails({ ...testData, id ,mobile:testData?.mobile?.split("+91")?.length===1?testData?.mobile?.split("+91")[0]:testData?.mobile?.split("+91")[1],logo:url }));
       
     }

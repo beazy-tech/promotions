@@ -1,5 +1,4 @@
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { showPopUp } from '../../action';
 const uploadFile=async (id:string,image:any)=>{
     try{
         const storage = getStorage();
