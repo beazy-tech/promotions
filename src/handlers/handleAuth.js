@@ -1,6 +1,6 @@
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
 import {app} from "../firebaseConfig/config"
-import {businessDetails, showPopUp, userId } from "../../action";
+import {businessDetails,  userId } from "../../action";
 const auth = getAuth(app);
 auth.useDeviceLanguage();
 const onCaptchVerify = () => {
@@ -55,7 +55,6 @@ const onSingup = (contact, setIsOtpSent,resend=false) => {
 var credentials = "";
 const onOTPVerify = (otp, setShowPopUp,dispatch) => {
     window.confirmationResult.confirm(otp).then((res) => {
-      dispatch(showPopUp([true,"Success"]))
       setShowPopUp(false);
     }).catch(err => console.log("error---> ", err))
 }

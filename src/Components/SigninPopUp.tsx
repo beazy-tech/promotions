@@ -38,7 +38,6 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
     const onOtpVerify=()=>{
         onOTPVerify(otp,setShowPopUp,dispatch)
     }
-    console.log(value);
     
     return (
         <>
