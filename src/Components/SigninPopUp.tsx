@@ -66,7 +66,7 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
                                 onChange={setOtp}
                                 numInputs={6}
                                 inputType='number'
-                                containerStyle={{justifyContent:"space-evenly",height:"fit-content"}}
+                                containerStyle={{justifyContent:"space-evenly",height:"fit-content",backgroundColor:'transparent',color:'black'}}
                                 renderSeparator={<span>-</span>}
                                 inputStyle={inputStyle}
                                 renderInput={(props) => <input {...props}
@@ -78,9 +78,6 @@ export default function SigninPopUp({ setShowPopUp,value,setValue }: initprops) 
                 <button className={styles.crossBtn} onClick={handelCross}>
                     <CloseIcon/>
                 </button>
-                {/* <div className={styles.re_btns}>
-                    <p className={styles.resend_otp} onClick={(e)=>onSingup(value,)} >Resend Otp</p>
-                </div> */}
             </div>
         </div >
     </>

@@ -15,7 +15,11 @@ interface initalInfo{
         msg:string,
         type:string
         showPopUp:boolean
-    }
+    },
+    DoesUserExists:boolean,
+    isLoggedIn:boolean,
+    showProfile:boolean,
+    contactNumber:string
 }
 const initailState:initalInfo={
     userId:"",
@@ -34,7 +38,11 @@ const initailState:initalInfo={
         msg:"",
         type:"",
         showPopUp:false,
-    }
+    },
+    DoesUserExists:true,
+    isLoggedIn:false,
+    showProfile:false,
+    contactNumber:""
 }
 const storeData=(state:any=initailState,action:any)=>{
     switch (action.type){
@@ -44,6 +52,14 @@ const storeData=(state:any=initailState,action:any)=>{
             return {...state,businessDetails:action.payload.businessDetails}
         case "TOSTERDATA":
             return {...state,toster:action.payload.toster}
+        case "DOESUSEREXISTS":
+            return {...state,DoesUserExists:action.payload.DoesUserExists}
+        case "ISLOGGEDIN":
+            return {...state,isLoggedIn:action.payload.isLoggedIn}
+        case "SHOWPROFILE":
+            return {...state,showProfile:action.payload.showProfile}
+        case "CONTACT":
+            return {...state,contactNumber:action.payload.contactNumber}
         default:
             return state;
     }

@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap');
 .newPromotion{
     width:100vw;
-    height:100vh; 
+    height:100%; 
     padding-top:8rem;
     display:flex;
     flex-direction: column;
+    background-color: gainsboro;
+    color:black;
     gap:5rem;
     @media screen and (min-width:950px)
     {

@@ -19,10 +19,11 @@ const createNewPromotion = async (testData:datatype,id:string,uid:string,dispatc
   const writeDoc = doc(db, `promoter/${uid}/promotion`,id);
   try {
       let data = await setDoc(writeDoc, { ...testData })
-      // dispatcher(toster(data:{msg:"Promotion Created Successfully", type:"Success", showPopUp:true}))
+      dispatcher(toster({msg:"Promotion created Successfully",type:"Success",showPopUp:true}))
       setIsPromotionCreated(true);
   }
   catch (err) {
+    dispatcher(toster({msg:"Promotion creation Failed",type:"Failed",showPopUp:true}))
     console.log(err);
   }
 }

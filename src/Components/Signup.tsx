@@ -8,7 +8,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import createPromoterAccount from '../handlers/createPromoterAccount';
 import { useRouter } from 'next/router';
 import promoterInfo from '@/handlers/promoterInfo';
-import uploadFile from '@/handlers/uploadFiles';
+import {uploadFile} from '@/handlers/uploadFiles';
 interface initalData{
   address:string,
   city:string,
@@ -38,6 +38,8 @@ export default function CreateAccount() {
   const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
   const route = useRouter();
   const businessDetails=useSelector((state:{rootReducer:{storeData:{businessDetails:any}}})=>state.rootReducer.storeData.businessDetails);
+  const isLoggedIn=useSelector((state:{rootReducer:{storeData:{isLoggedIn:any}}})=>state.rootReducer.storeData.isLoggedIn);
+  const contactNumber=useSelector((state:{rootReducer:{storeData:{contactNumber:string}}})=>state.rootReducer.storeData.contactNumber)
   const reducer=(state:initalData,action:any)=>{
     switch(action.type){
       case "ADDRESS":
@@ -95,7 +97,12 @@ export default function CreateAccount() {
         promoterInfo(userId,dispatcher);
       }
     },[userId])
-    console.log(state);
+    useEffect(()=>{      
+      if(contactNumber.length > 0)
+      {
+        dispatch({type:"MOBILE",payload:contactNumber})
+      }
+    },[contactNumber])
     
     useEffect(()=>{
       if(businessDetails?.address?.length>0 && businessDetails?.type?.length>0)
@@ -120,10 +127,10 @@ export default function CreateAccount() {
     return (
     <>
       <div className={styles.createAccount}>
-        {showPopUp?<SigninPopUp value={value} setValue={setValue} setShowPopUp={setShowPopUp}/>:<></>}
+        {!isLoggedIn?showPopUp?<SigninPopUp value={value} setValue={setValue} setShowPopUp={setShowPopUp}/>:<></>:<></>}
         <div className={styles.createAccount_left}>
           <h2 className={styles.createAccount_heading}>Let's Get Started ...</h2>
-          <p className={styles.createAccount_desc}>Please provide your business details. The information will be used in the promotion banner</p>
+          <p className={styles.createAccount_desc}>Please provide your business details. The information will be used in the <b>promotion banner</b></p>
           <form className={styles.createAccount_form} onSubmit={handleSubmit}>
             <FormControl className={styles.form_input} variant="standard">
               <InputLabel className={styles.label} id="demo-simple-select-standard-label">Type</InputLabel>

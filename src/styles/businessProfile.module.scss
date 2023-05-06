@@ -1,0 +1,135 @@
+.businessProfile_page {
+  background: transparentize($color: rgb(54, 53, 53), $amount: 0.1);
+  position: absolute;
+  width: 100%;
+  padding-top: 5rem;
+  top: 0;
+  @media screen and (min-width:950px)
+  {
+    width:100%;
+    padding: 6rem 1rem;
+  }
+  .businessProfile {
+    height: fit-content;
+    display: flex;
+    position: relative;
+    width: 100vw;
+    margin: auto;
+    padding: 2rem;
+    background-color: gainsboro;
+    gap: 4rem;
+    flex-direction: column;
+    @media screen and (min-width: 950px) {
+      width: 60vw;
+    }
+    .businessProfile_Heading {
+      margin: auto;
+    }
+    .businessProfile_body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+      .businessbody_head {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        .businessbody_logo {
+          position: relative;
+          width: fit-content;
+          .businessbody_Image {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+          }
+          .businessbody_Image_edit_btn {
+            position: absolute;
+            z-index: 899;
+            top: 60px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            right: 0;
+            padding: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f75f00;
+            border-radius: 50%;
+          }
+        }
+        .businessbody_Name_address {
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          gap: 2px;
+          width: fit-content;
+          gap: 4px;
+          .businessbody_Name {
+            font-size: large;
+            font-weight: 500;
+          }
+          .businessbody_address {
+            font-size: small;
+            font-size: 200;
+          }
+        }
+      }
+    }
+    .businessProfile_details_form {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin: auto;
+      width: fit-content;
+      @media screen and (min-width: 950px) {
+        width: 100%;
+      }
+      .businessProfile_details_form_col1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        gap: 2rem;
+        @media screen and (min-width: 950px) {
+          flex-direction: row;
+          gap: 0;
+        }
+      }
+      .businessProfile_details_form_col2 {
+        @media screen and (min-width:950px)
+        {
+          margin: auto;
+        }
+      }
+      .businessProfile_logo_change {
+        position: absolute;
+        z-index: -100;
+      }
+      .submitchanges {
+        width: fit-content;
+        margin: auto;
+        padding: 12px 36px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        background-color: #f75f00;
+        box-shadow: 12px 28px 102px #f75f00;
+      }
+    }
+    .close_btn {
+      width: fit-content;
+      height: fit-content;
+      padding:0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      right: 2rem;
+      top: 1rem;
+      .close_icons {
+        color: black;
+      }
+    }
+  }
+}

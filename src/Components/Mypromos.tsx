@@ -16,6 +16,7 @@ import promotionData from '@/handlers/promotionData';
 import CouponVerification from './CouponVerification';
 import AddIcon from '@mui/icons-material/Add';
 import { isPast} from 'date-fns';
+import { showProfile } from '../../action';
 interface data{
     datas:any,
     loading:boolean,
@@ -102,6 +103,9 @@ export default function Mypromos() {
         }
         setShowTableData(data)
     },[PromotionsInfo,IsActiivePromoActive])
+    const profilePage=()=>{
+        dispatch(showProfile(true));
+    }
     return (
         <>
             <div className={styles.mypromos}>
@@ -113,7 +117,7 @@ export default function Mypromos() {
                             <Link href="/newpromo"><button className={styles.myPromos_head_right_btn}><AddIcon/>Create new promotion</button></Link>
                         </li>
                         <li className={styles.myPromos_head_right_item}>
-                            <Image className={styles.myPromos_head_img} src={businessDetails.logo} alt="none" width={10} height={10} />
+                            <button className={styles.business_Profile_btn} onClick={profilePage}><Image className={styles.myPromos_head_img} src={businessDetails.logo} alt="none" width={100} height={100} /></button>
                         </li>
                     </ol>
                 </div>

@@ -25,15 +25,48 @@ const businessDetails=(data:any)=>{
         }
     }
 }
-const toster=(data:{msg:string,type:string,showPopUp:boolean})=>
-{
+const toster=(data:any)=>
+{    
     return {
         type:"TOSTERDATA",
         payload:{
+            toster:{
             msg:data.msg,
             type:data.type,
             showPopUp:data.showPopUp
+        }}
+    }
+}
+const DoesUserExists=(data:boolean)=>{
+    return {
+        type:"DOESUSEREXISTS",
+        payload:{
+            DoesUserExists:data
         }
     }
 }
-export {userId,businessDetails,toster}
+const isLoggedIn=(data:boolean)=>{
+    return {
+        type:"ISLOGGEDIN",
+        payload:{
+            isLoggedIn:data
+        }
+    }
+}
+const showProfile=(data:boolean)=>{
+    return {
+        type:"SHOWPROFILE",
+        payload:{
+            showProfile:data
+        }
+    }
+}
+const contactNumber=(data:string)=>{
+    return {
+        type:"CONTACT",
+        payload:{
+            contactNumber:data
+        }
+    }
+}
+export {userId,businessDetails,toster,DoesUserExists,isLoggedIn,showProfile,contactNumber}

@@ -6,7 +6,7 @@
   align-items: center;
   padding: 6rem 0rem;
   flex-direction: column-reverse;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: space-evenly;
 
   @media screen and (min-width:950px) {
@@ -21,17 +21,18 @@
     width: 100vw;
     padding: 0 1rem;
     flex-direction: column;
-    gap: 4rem;
+    gap: 2rem;
 
     @media screen and (min-width:950px) {
       width: 40vw;
       padding: 0;
+      gap:4rem;
     }
 
     .home_body_tag {
       font-weight: 100;
       color: white;
-      font-size: 3rem;
+      font-size: 2rem;
       text-align: center;
 
       @media screen and (min-width:950px) {
@@ -49,7 +50,7 @@
       cursor: pointer;
       background-color: #075e7a;
       color: white;
-      font-weight: 100;
+      font-weight: 400;
 
       @media screen and (min-width:950px) {
         width: fit-content;
@@ -66,12 +67,11 @@
 
     @media screen and (min-width:950px) {
       padding-top: 4rem;
-
     }
 
     .Home_right_images {
-      height: 400px;
-      width: 200px;
+      height: 340px;
+      width: 165px;
       @media screen and (min-width:950px)
       {
         height: 500px;

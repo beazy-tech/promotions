@@ -4,20 +4,24 @@ import type { AppProps } from 'next/app'
 import Navbar from '../Components/Navbar/Navbar'
 import { checkUserAuth } from '@/handlers/handleAuth'
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import configureStore from '../../store';
+import store from '../../store';
 import StatusPopup from '@/Components/StatusPopup';
 import Toster from '@/Components/Toster/Toster';
+import BusinessProfile from '@/Components/BusinessProfile';
+import { doesNotMatch } from 'assert';
+import { Router } from 'next/router';
 function App({ Component, pageProps }: AppProps) {
   const [ShowStatusPopup,setShowStatusPopup]=useState<{isShow:boolean,type:string}>({isShow:false,type:""});
   const [showToster,setShowToster]=useState(false);
-  console.log(showToster);
-  
+  const [showProfile,setShowProfile]=useState(false);
   return (
-    <Provider store={configureStore}>
+    <Provider store={store}>
       {ShowStatusPopup.isShow?<StatusPopup />:<></>}
-      <Navbar setShowToster={setShowToster} showToaster={showToster}/>
+      <Navbar setShowToster={setShowToster} showToaster={showToster} setShowProfile={setShowProfile}/>
       {showToster?<Toster/>:<></>}
-      <Component {...pageProps} />
+      <Component {...pageProps}/>
+      <Toster/>
+      {showProfile?<BusinessProfile/>:<></>}
     </Provider>
   );
 }

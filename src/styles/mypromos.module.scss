@@ -5,6 +5,7 @@
     display:flex;
     flex-direction: column;
     gap:2rem;
+    background-color: gainsboro;
     @media screen and (min-width:950px)
     {
         padding:6rem 1rem;
@@ -13,6 +14,7 @@
         width:100%;
         display:flex;
         justify-content: space-between;
+        color:black;
         align-items: center;
         .myPromos_head_heading{
             font-weight: 500;
@@ -34,6 +36,14 @@
                 align-items: center;
                 justify-content: center;
                 width: fit-content;
+                .business_Profile_btn{
+                    width: fit-content;
+                    height: fit-content;
+                    border:none;
+                    background-color: transparent;
+                    color:black;
+                    cursor: pointer;
+                }
                 .myPromos_head_right_btn{
                     background-color: black;
                     color:white;

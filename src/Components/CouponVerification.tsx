@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'
 import styles from '@/styles/CouponVerification.module.scss'
 import CloseIcon from '@mui/icons-material/Close';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import validateCoupon from '@/handlers/validateCoupon';
 import verifiedImg from '../utils/verification-icon-8.jpg'
 import Image from 'next/image';
@@ -12,11 +12,12 @@ interface props {
 }
 export default function CouponVerification({ showVerificationComponent, setshowVerificationComponent, promotionId }: props) {
     const [couponCode, setCouponCode] = useState("");
+    const dispatch=useDispatch();
     const [isRedeemed, setIsRedeemed] = useState(false);
     const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
     const validateCouponCode = () => {
         if (userId.length > 0) {
-            validateCoupon(userId, promotionId, couponCode, setIsRedeemed);
+            validateCoupon(userId, promotionId, couponCode, setIsRedeemed,dispatch);
         }
         }
         // usx

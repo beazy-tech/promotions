@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import img from '../utils/Screenshot_from_2023-04-18_15-30-38-removebg-preview.png'
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { toster } from '../../action';
 import MessageInput from './Inputs/MessageInput';
-import { SpawnSyncOptionsWithStringEncoding } from 'child_process';
 const categories = [
   "Flat Rs_ Off", "Flat _% discount", "Rs_ off on purchases above Rs_", "_ days free trial", "Custom message", "Brand promotion"
 ]
@@ -57,6 +57,7 @@ export default function Createpromo() {
   const [values, onChangeValue] = useState([new Date(), new Date()]);
   const userId = useSelector((state: { rootReducer: { storeData: { userId: string } } }) => state.rootReducer.storeData.userId);
   const [isPromotionCreated, setIsPromotionCreated] = useState(false);
+  const tosterData=useSelector((state:{rootReducer:{storeData:{toster:any}}})=>state.rootReducer.storeData.toster);
   const dispatcher = useDispatch()
   const route = useRouter();
   const reducer = (state: initalstate, action: any) => {
@@ -109,13 +110,21 @@ export default function Createpromo() {
       retailers: [],
       coupons: []
     };
-    createNewPromotion(data, data.id, userId, dispatcher, setIsPromotionCreated)
+    createNewPromotion(data, data.id, userId, dispatcher, setIsPromotionCreated);
   }
   useEffect(() => {
     if (isPromotionCreated) {
       route.push("/mypromos")
     }
   }, [isPromotionCreated])
+  useEffect(()=>{
+    if(tosterData.showPopUp)
+    {
+      setTimeout(()=>{        
+        dispatch(toster({msg:"",type:"",showPopUp:false}))
+      },2000)
+    }
+  },[tosterData.showPopUp])
   return (
     <>
       <div className={styles.newPromotion}>
@@ -123,9 +132,10 @@ export default function Createpromo() {
         <div className={styles.newPromotion_body}>
           <form onSubmit={handleSubmit} className={styles.promotionForm}>
             <SelectionInput Label="Promotion Category" Name="Promotion_category" types={categories} dispatch={dispatch} State={""} />
-            {state.category!=="Brand promotion"?<>
+            {state.category!=="Brand promotion"?
+            <>
               <SelectionInput Label="Promotion Type" Name="Promotion_type" types={promtionType} dispatch={dispatch} State={state} />
-              {state.category!=="Custom message"?state.category!=="_days free trial"?state?.category !== "Rs_ off on purchases above Rs_" ?
+              {state.category!=="Custom message"?state.category!=="_ days free trial"?state?.category !== "Rs_ off on purchases above Rs_" ?
                 <Input required={true} Lable="Discount" Type="number" Placeholder={state?.category === "Flat Rs_ Off" ? "Discount(in Rs)" : state?.category === "Flat_ % discount" ? "Discount(in %)" : "Discount Price"} dispatch={dispatch} value={state.value} /> :
                 <div className={styles.discount_off_onn}>
                   <Input required={true} Lable="Discount (in Rs)" Type="number" Placeholder={"discount of (in rs)"} dispatch={dispatch} value={state.value} />
@@ -133,7 +143,8 @@ export default function Createpromo() {
                 </div>:
                 <Input required={true} Lable="Number of Days" Type="number" Placeholder={"type here"} dispatch={dispatch} value={state.value} />:<MessageInput dispatch={dispatch} placeholder='Enter your Message (less then 200 characters)' messageValue={state.message}/>
               }
-            </>:<MessageInput dispatch={dispatch} placeholder='Enter your Message (less then 50 characters only)' messageValue={state.message}/>  }
+            </>:
+            <MessageInput dispatch={dispatch} placeholder='Enter your Message (less then 50 characters only)' messageValue={state.message}/>  }
             <div className={styles.date_rangePicker}>
               <p className={styles.validate_picker_label}>Validity</p>
               <DateRangePicker onChange={handleSelect} minDate={new Date()} format='dd/MM/yyyy' className={styles.daterangePicker} required={true} clearIcon={null} value={[values[0], values[1]]} />

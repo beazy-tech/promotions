@@ -1,6 +1,6 @@
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
 import {app} from "../firebaseConfig/config"
-import {businessDetails,  userId } from "../../action";
+import {businessDetails,  contactNumber,  DoesUserExists,  isLoggedIn,  userId } from "../../action";
 const auth = getAuth(app);
 auth.useDeviceLanguage();
 const onCaptchVerify = () => {
@@ -65,7 +65,9 @@ const onLoginVerification = async (contact,setIsOtpSent) => {
 const checkUserAuth = (dispatch) => {
     auth.onAuthStateChanged((user)=>{
       if(user){
+        dispatch(contactNumber(user.phoneNumber.slice(3)))
         dispatch(userId(user?.uid))
+        dispatch(isLoggedIn(true))
       }
       else{
         console.log("User is logged in")
@@ -75,6 +77,7 @@ const checkUserAuth = (dispatch) => {
 const signOutUser = (dispatch) => {
     signOut(auth).then(() => {
         dispatch(userId(""))
+        dispatch(isLoggedIn(false));
         dispatch(businessDetails({
             address:"",
             city:"",

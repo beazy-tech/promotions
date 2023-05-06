@@ -1,11 +1,12 @@
 .createAccount {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     padding-top: 4rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-
+    background-color: white;
+    color:black;
     @media screen and (min-width:950px) {
         padding-top: 8rem;
     }
@@ -42,6 +43,7 @@
     
             .insertLogo {
                 padding-top: 1rem;
+                color:black;
     
                 .image_input {
                     display: flex;
