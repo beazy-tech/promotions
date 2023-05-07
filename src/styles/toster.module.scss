@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap');
 .toster_Main{
     z-index: 999;
-    position: absolute;
+    position: fixed;
     background-color: green;
     border-radius: 12px;
-    height:40px;
+    height:80px;
     display: flex;
     align-items: center;
     gap:0.5rem;
