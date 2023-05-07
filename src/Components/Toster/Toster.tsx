@@ -6,13 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toster } from '../../../action';
 export default function Toster() {
   const tosterData=useSelector((state:{rootReducer:{storeData:{toster:any}}})=>state.rootReducer.storeData.toster)
-  const dispatch=useDispatch()
-  const tosterLs=()=>{
-    dispatch(toster({msg:"Successfully Logged In",type:"Success",showPopUp:!tosterData.showPopUp}))
-  }
   return (
     <>
-        <div onClick={tosterLs} className={styles.toster_Main} style={tosterData.showPopUp?tosterData.type==="Success"?{backgroundColor:"green",padding:"0 2rem"}:{backgroundColor:"red",padding:"0 2rem"}:{width:"0px"}}>
+        <div className={styles.toster_Main} style={tosterData.showPopUp?tosterData.type==="Success"?{backgroundColor:"green",padding:"0 2rem"}:{backgroundColor:"red",padding:"0 2rem"}:{width:"0px"}}>
             { tosterData.type==="Success"?
               <CheckCircleIcon className={styles.tosterSuccessIcon} style={tosterData.showPopUp?{display:"block"}:{display:"none"}} />:
               <CancelIcon className={styles.tosterFailedIcons} style={tosterData.showPopUp?{display:"block"}:{display:"none"}}/>                
