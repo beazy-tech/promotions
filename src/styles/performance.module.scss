@@ -1,0 +1,56 @@
+.performancePage {
+  background: transparentize($color: rgb(54, 53, 53), $amount: 0.1);
+  height: fit-content;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  align-items: center;
+  .performancePage_body {
+    width: 300px;
+    height: 200px;
+    padding: 2rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    gap: 2rem;
+    @media screen and (min-width: 950px) {
+      width: 600px;
+      height: 300px;
+      padding: 1rem;
+    }
+    .performancePage_heading {
+      font-weight: 700;
+    }
+    .performancePage_Items {
+      font-size: small;
+      font-weight: 500;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      @media screen and (min-width: 950px) {
+        font-size: medium;
+        gap: 1rem;
+      }
+    }
+    .prefomancePage_close{
+        position: absolute;
+        top:12px;
+        width: fit-content;
+        height: fit-content;
+        background: none;
+        border:none;
+        right:12px;
+        padding:0;
+        cursor: pointer;
+    }
+  }
+}

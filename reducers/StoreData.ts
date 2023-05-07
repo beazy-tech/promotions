@@ -1,3 +1,17 @@
+type promotion={
+        category: string,
+        coupons: Array<any>;
+        eventTimeStamp: string;
+        eventTimeStampId: string;
+        id: string;
+        message: string;
+        retailers: Array<any>,
+        totalRedeemedCoupon: number,
+        type: string,
+        validFrom: string,
+        validTo: string,
+        value: string;
+}
 interface initalInfo{
     userId:string,
     businessDetails:{
@@ -20,6 +34,7 @@ interface initalInfo{
     isLoggedIn:boolean,
     showProfile:boolean,
     contactNumber:string
+    promotionInfo:Array<any>
 }
 const initailState:initalInfo={
     userId:"",
@@ -34,6 +49,7 @@ const initailState:initalInfo={
         type:"",
         zipcode:""
     },
+    promotionInfo: [],
     toster:{
         msg:"",
         type:"",
@@ -60,6 +76,8 @@ const storeData=(state:any=initailState,action:any)=>{
             return {...state,showProfile:action.payload.showProfile}
         case "CONTACT":
             return {...state,contactNumber:action.payload.contactNumber}
+        case "PROMOTIONDATA":
+            return {...state,promotionInfo:action.payload.promotionData}
         default:
             return state;
     }

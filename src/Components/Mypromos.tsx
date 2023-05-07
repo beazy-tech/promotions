@@ -17,6 +17,7 @@ import CouponVerification from './CouponVerification';
 import AddIcon from '@mui/icons-material/Add';
 import { isPast} from 'date-fns';
 import { showProfile } from '../../action';
+import Performance from './Performance';
 interface data{
     datas:any,
     loading:boolean,
@@ -39,12 +40,13 @@ interface promoterInfo{
 
 export default function Mypromos() {
     const [IsActiivePromoActive, setIsActiivePromoActive] = useState(true);
-    const [PromotionsInfo,setPromotionsInfo]:[Array<any>,Function]=useState([])
     const [TableData,setTableData]:[Array<any>,Function]=useState([]);
     const userId=useSelector((state:{rootReducer:{storeData:{userId:string}}})=>state.rootReducer.storeData.userId);
     const [showVerificationComponent,setshowVerificationComponent]=useState(false);
     const [promotionId,setpromotionId]=useState("")
     const [showTableData,setShowTableData]:[Array<any>,Function]=useState([])
+    const [showPromotion,setShowPromotion]=useState<{show:boolean,id:string}>({show:false,id:""})
+    const PromotionsInfo=useSelector((state:{rootReducer:{storeData:{promotionInfo:any}}})=>state.rootReducer.storeData.promotionInfo);
     const businessDetails=useSelector((state:{rootReducer:{storeData:{businessDetails:any}}})=>state.rootReducer.storeData.businessDetails)
     const dispatch=useDispatch()    
     function createData( PromoDate: string, Name: string ,validFrom:string,validTo:string,promotionId:string,message:string) {
@@ -66,7 +68,7 @@ export default function Mypromos() {
     useEffect(()=>{
         if(userId.length>0)
         {
-            promotionData(userId,setPromotionsInfo)
+            promotionData(userId,dispatch)
         }
     },[userId])
     
@@ -87,7 +89,6 @@ export default function Mypromos() {
                     data.push(promoData);
                 }
             })
-            console.log(data)
         }
         else{
             PromotionsInfo.map((promoData:any,count:number)=>{
@@ -97,9 +98,7 @@ export default function Mypromos() {
                 {
                     data.push(promoData);
                 }
-            })
-            console.log(data);
-            
+            })            
         }
         setShowTableData(data)
     },[PromotionsInfo,IsActiivePromoActive])
@@ -150,7 +149,7 @@ export default function Mypromos() {
                                             </TableCell>
                                             <TableCell align="center">{row.PromoDate}</TableCell>
                                             <TableCell align="center">{row.validTo} - {row.validFrom}</TableCell>
-                                            <TableCell align="center" sx={{paddingRight:'45px'}}><button className={styles.validate_info_graph}><TrendingUpIcon/></button></TableCell>
+                                            <TableCell align="center" sx={{paddingRight:'45px'}}><button onClick={()=>setShowPromotion({show:true,id:row.promotionId})} className={styles.validate_info_graph}><TrendingUpIcon style={{color:"green"}}/></button></TableCell>
                                             <TableCell align="center"><button onClick={()=>selectPromotion(row.promotionId)}  className={styles.validate_info}>Click Here</button></TableCell>
                                         </TableRow>
                                     ))}
@@ -159,6 +158,7 @@ export default function Mypromos() {
                         </TableContainer>
                     </div>
                 </div>
+                {showPromotion.show?<Performance showPromotion={showPromotion} setShowPromotion={setShowPromotion}/>:<></>}
             </div>
         </>
     )

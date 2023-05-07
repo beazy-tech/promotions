@@ -1,6 +1,7 @@
 import { doc, getDocs,collection } from '@firebase/firestore';
 import {db} from '../firebaseConfig/config';
-const promotionData = async (uid:string,setPromotionInfo:Function) => {
+import { promotionInfo } from '../../action';
+const promotionData = async (uid:string,dispatch:Function) => {
   const readDoc = collection(db, `promoter/${uid}/promotion`);
   try {
     const docsSnap = await getDocs(readDoc);
@@ -8,7 +9,7 @@ const promotionData = async (uid:string,setPromotionInfo:Function) => {
     docsSnap.forEach(async doc => {
         data.push(doc.data());
     })
-    setPromotionInfo(data)
+    dispatch(promotionInfo(data))
         
   }
   catch (err) {
