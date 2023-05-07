@@ -19,14 +19,14 @@ const updateFile = async (id: string, imageUrl: any, newImage: any, dispatch: Fu
             const imageref = ref(storage, `pomoter/${id}/${imageUrl}`);
             let imagedata = imageref.name.split("%2F");
             let imageIs = "";
-            for (let i in imagedata) {
+            for (let i=0;i<imagedata.length; i++) {
                 if (i < imagedata.length - 1) {
                     imageIs += imagedata[i] + "/";
                 } else {
                     let imageName = "";
                     imagedata = imagedata[i].split("?");
                     imagedata = imagedata[0].split("%20");
-                    for (let j in imagedata) {
+                    for (let j=0;j<imagedata.length;j++) {
                         if(j < imagedata.length - 1)
                         {
                             imageName += imagedata[j] + " ";

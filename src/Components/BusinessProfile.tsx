@@ -55,7 +55,7 @@ export default function BusinessProfile() {
   );
   const [image, setImage] = useState<File>();
   const [previewimage, setPreviewImage] = useState<string>("");
-  const logoInput = useRef(null);
+  const logoInput = useRef<HTMLInputElement>(null);
   const reducer = (
     state: initalData,
     action: { type: string; payload: any }
