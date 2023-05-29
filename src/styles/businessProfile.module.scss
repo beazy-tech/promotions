@@ -59,9 +59,8 @@
           }
         }
         .businessbody_Name_address {
-          display: flex;
+          display: flex-start;
           flex-direction: column;
-          justify-content: start;
           gap: 2px;
           width: fit-content;
           gap: 4px;
